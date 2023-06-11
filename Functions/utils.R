@@ -18,8 +18,9 @@ excludeCompanies <- function(commonStocksDF, excludedIndustries) {
 # Function to clean up commonStocksDF
 cleanCommonStocksDF <- function(commonStocksDF) {
   cleanedDF <- commonStocksDF %>%
-    select(-c("currency.y", "estimateCurrency", "symbol2")) %>%
+    select(-c("currency.y", "estimateCurrency", "symbol2", "displaySymbol", "ticker")) %>%
     distinct() %>%
-    rename(currency = currency.x)
+    rename(currency = currency.x) %>%
+  
   return(cleanedDF)
 }

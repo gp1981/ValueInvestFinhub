@@ -40,7 +40,7 @@ commonStocksDF <- inner_join(commonStocks, commonStockProfilesDF, by = "symbol")
 
 # Clean up unnecessary objects
 rm(commonStocks, commonStockProfiles, commonStockProfilesDF)
-cleanedDF <- cleanCommonStocksDF(commonStocksDF)
+DF <- cleanCommonStocksDF(commonStocksDF)
 
 
 # -------------------- 04 - Data Analysis --------------------
