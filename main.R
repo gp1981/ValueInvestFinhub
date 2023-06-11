@@ -40,7 +40,10 @@ commonStocksDF <- inner_join(commonStocks, commonStockProfilesDF, by = "symbol")
 
 # Clean up unnecessary objects
 rm(commonStocks, commonStockProfiles, commonStockProfilesDF)
-DF <- cleanCommonStocksDF(commonStocksDF)
+cleanDF <- cleanCommonStocksDF(commonStocksDF)
+
+# Filter companies based on exclusion criteria and minimum market capitalization
+filteredDF <- filterCompanies(cleanDF, minMarketCapMillionUSD = 50)  # Example: Minimum market cap of 50 million USD
 
 
 # -------------------- 04 - Data Analysis --------------------
