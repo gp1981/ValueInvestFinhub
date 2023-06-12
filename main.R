@@ -30,7 +30,7 @@ stockSymbols <- getStockSymbols()
 commonStocks <- filterCommonStocks(stockSymbols)
 
 # Retrieve company profile data for common stocks
-commonStockProfiles <- retrieveCompanyProfiles(commonStocks, API_KEY, maxCompanies = 300)
+commonStockProfiles <- retrieveCompanyProfiles(commonStocks, API_KEY, maxCompanies = 30)
 
 # Convert commonStockProfiles list to data frame
 commonStockProfilesDF <- bind_rows(commonStockProfiles, .id = "symbol")
@@ -45,6 +45,8 @@ cleanDF <- cleanCommonStocksDF(commonStocksDF)
 # Filter companies based on exclusion criteria and minimum market capitalization
 filteredDF <- filterCompanies(cleanDF, minMarketCapMillionUSD = 50)  # Example: Minimum market cap of 50 million USD
 
+# Retrieve financial data for filtered companies
+explodedDF <- retrieveFinancials(filteredDF, API_KEY)
 
 # -------------------- 04 - Data Analysis --------------------
 # Perform analysis on common stocks data frame
