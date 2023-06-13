@@ -67,9 +67,7 @@ retrieveFinancials <- function(filteredDF, apiKey) {
     total = totalCompanies
   )
   
-  bsDF <- data.frame()
-  icDF <- data.frame()
-  cfDF <- data.frame()
+  financialsDF <- data.frame()
   
   for (i in 1:totalCompanies) {
     symbol <- filteredDF[i, "symbol"]
@@ -78,13 +76,7 @@ retrieveFinancials <- function(filteredDF, apiKey) {
     data <- httr::content(response, as = "text", encoding = "UTF-8")
     
     financials <- jsonlite::fromJSON(data)$data
-    bs <- lapply(financials$report$bs, as.data.frame)
-    ic <- lapply(financials$report$ic, as.data.frame)
-    cf <- lapply(financials$report$cf, as.data.frame)
-    
-    bsDF <- dplyr::bind_rows(bsDF, do.call(rbind, bs))
-    icDF <- dplyr::bind_rows(icDF, do.call(rbind, ic))
-    cfDF <- dplyr::bind_rows(cfDF, do.call(rbind, cf))
+    financialsDF <- dplyr::bind_rows(financialsDF, as.data.frame(financials))
     
     progress$tick()
     
@@ -94,5 +86,5 @@ retrieveFinancials <- function(filteredDF, apiKey) {
     }
   }
   
-  return(list(bs = bsDF, ic = icDF, cf = cfDF))
+  return(financialsDF)
 }

@@ -46,8 +46,12 @@ cleanDF <- cleanCommonStocksDF(commonStocksDF)
 filteredDF <- filterCompanies(cleanDF, minMarketCapMillionUSD = 50)  # Example: Minimum market cap of 50 million USD
 
 # Retrieve financial data for filtered companies
-explodedDF <- retrieveFinancials(filteredDF, API_KEY)
+financialsDF <- retrieveFinancials(filteredDF, API_KEY)
 
+concepts <- extractConcepts(financialsDF)
+bsConcepts <- concepts$balance_sheet
+icConcepts <- concepts$income_statement
+cfConcepts <- concepts$cash_flow
 # -------------------- 04 - Data Analysis --------------------
 # Perform analysis on common stocks data frame
 # Call functions from analysis.R or add your analysis code here
