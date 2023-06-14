@@ -52,6 +52,14 @@ concepts <- extractConcepts(financialsDF)
 bsConcepts <- concepts$balance_sheet
 icConcepts <- concepts$income_statement
 cfConcepts <- concepts$cash_flow
+
+# Read the mapping table from the CSV file
+mappingTable <- read.csv("Functions/mapping_table.csv")
+
+# Map bsConcepts, icConcepts, and cfConcepts using the mapping table
+bsMapped <- mapConcepts(bsConcepts$concept, mappingTable) #-> still pattern=goodwill is labelled "intangibles_less_goodwill"
+icMapped <- mapConcepts(icConcepts$concept, mappingTable)
+cfMapped <- mapConcepts(cfConcepts$concept, mappingTable)
 # -------------------- 04 - Data Analysis --------------------
 # Perform analysis on common stocks data frame
 # Call functions from analysis.R or add your analysis code here

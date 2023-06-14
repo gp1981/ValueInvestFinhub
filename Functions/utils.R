@@ -53,3 +53,29 @@ extractConcepts <- function(financialsDF) {
   
   return(list(balance_sheet = bsConcepts, income_statement = icConcepts, cash_flow = cfConcepts))
 }
+
+# Function to map concepts to standardized labels using a mapping table
+mapConcepts <- function(concepts, mappingTable) {
+  mappedLabels <- character(length(concepts))
+  
+  for (i in seq_along(concepts)) {
+    concept <- concepts[i]
+    
+    # Exact match
+    exactMatchIndex <- grep(concept, mappingTable$Pattern, ignore.case = FALSE)
+    if (length(exactMatchIndex) > 0) {
+      mappedLabels[i] <- mappingTable$Label[exactMatchIndex[1]]
+    } else {
+      # Partial match
+      partialMatchIndex <- grep(concept, mappingTable$Pattern, ignore.case = TRUE)
+      if (length(partialMatchIndex) > 0) {
+        mappedLabels[i] <- mappingTable$Label[partialMatchIndex[1]]
+      } else {
+        mappedLabels[i] <- "No Match"  # Indication for no match
+      }
+    }
+  }
+  
+  return(data.frame(concept = concepts, label = mappedLabels, stringsAsFactors = FALSE))
+}
+
