@@ -54,28 +54,33 @@ extractConcepts <- function(financialsDF) {
   return(list(balance_sheet = bsConcepts, income_statement = icConcepts, cash_flow = cfConcepts))
 }
 
-# Function to map concepts to standardized labels using a mapping table
-mapConcepts <- function(concepts, mappingTable) {
-  mappedLabels <- character(length(concepts))
+# Function to initialize the mapping table
+initializeMapping <- function(concepts) {
+  bsConcepts <- concepts$balance_sheet
+  icConcepts <- concepts$income_statement
+  cfConcepts <- concepts$cash_flow
   
-  for (i in seq_along(concepts)) {
-    concept <- concepts[i]
-    
-    # Exact match
-    exactMatchIndex <- grep(concept, mappingTable$Pattern, ignore.case = FALSE)
-    if (length(exactMatchIndex) > 0) {
-      mappedLabels[i] <- mappingTable$Label[exactMatchIndex[1]]
-    } else {
-      # Partial match
-      partialMatchIndex <- grep(concept, mappingTable$Pattern, ignore.case = TRUE)
-      if (length(partialMatchIndex) > 0) {
-        mappedLabels[i] <- mappingTable$Label[partialMatchIndex[1]]
-      } else {
-        mappedLabels[i] <- "No Match"  # Indication for no match
-      }
-    }
-  }
+  summary_bsConcepts <- bsConcepts %>% group_by(concept) %>% distinct()
+  summary_icConcepts <- icConcepts %>% group_by(concept) %>% distinct()
+  summary_cfConcepts <- cfConcepts %>% group_by(concept) %>% distinct()
   
-  return(data.frame(concept = concepts, label = mappedLabels, stringsAsFactors = FALSE))
+  return(list(summary_bsConcepts  = summary_bsConcepts , summary_icConcepts = summary_icConcepts, summary_cfConcepts = summary_cfConcepts))
+}
+
+# Function to map the concepts string of the financial data
+map_concepts <- function(mappingTable) {
+ 
+  # Retrieve the dataframe of the distinctive concepts
+  summary_bsConcept <- mappingTable$summary_bsConcepts
+  summary_icConcept <- mappingTable$summary_icConcepts
+  summary_cfConcept <- mappingTable$summary_cfConcepts
+  
+  # Save the data frames as CSV files
+  write.csv(summary_bsConcept, file = "summary_bsConcept.csv", row.names = FALSE)
+  write.csv(summary_icConcept, file = "summary_icConcept.csv", row.names = FALSE)
+  write.csv(summary_cfConcept, file = "summary_cfConcept.csv", row.names = FALSE)
+  
+  # ..remaining code...
+  return()
 }
 

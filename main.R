@@ -30,7 +30,7 @@ stockSymbols <- getStockSymbols()
 commonStocks <- filterCommonStocks(stockSymbols)
 
 # Retrieve company profile data for common stocks
-commonStockProfiles <- retrieveCompanyProfiles(commonStocks, API_KEY, maxCompanies = 30)
+commonStockProfiles <- retrieveCompanyProfiles(commonStocks, API_KEY, maxCompanies = 300)
 
 # Convert commonStockProfiles list to data frame
 commonStockProfilesDF <- bind_rows(commonStockProfiles, .id = "symbol")
@@ -53,13 +53,17 @@ bsConcepts <- concepts$balance_sheet
 icConcepts <- concepts$income_statement
 cfConcepts <- concepts$cash_flow
 
-# Read the mapping table from the CSV file
-mappingTable <- read.csv("Functions/mapping_table.csv")
+# Initialize the mapping table
+mappingTable <- initializeMapping(concepts)
 
-# Map bsConcepts, icConcepts, and cfConcepts using the mapping table
-bsMapped <- mapConcepts(bsConcepts$concept, mappingTable) #-> still pattern=goodwill is labelled "intangibles_less_goodwill"
-icMapped <- mapConcepts(icConcepts$concept, mappingTable)
-cfMapped <- mapConcepts(cfConcepts$concept, mappingTable)
+summary_bsConcept <- mappingTable$summary_bsConcepts
+summary_icConcept <- mappingTable$summary_icConcepts
+summary_cfConcept <- mappingTable$summary_cfConcepts
+
+# Create the mapping table as CSV file
+map_concepts(mappingTable)
+
+
 # -------------------- 04 - Data Analysis --------------------
 # Perform analysis on common stocks data frame
 # Call functions from analysis.R or add your analysis code here
