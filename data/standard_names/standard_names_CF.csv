@@ -1,20 +1,32 @@
-"standard_names_CF"
-"Net Income"
-"Depreciation and Amortization"
-"Deferred Taxes"
-"Stock-Based Compensation"
-"Changes in Working Capital"
-"Accounts Receivable"
-"Inventory"
-"Accounts Payable"
-"Income Taxes Payable"
-"Other Working Capital"
-"Net Cash Provided by Operating Activities"
-"Acquisition and Disposition of Property, Plant, and Equipment"
-"Purchases and Sales of Investments"
-"Issuance and Repayment of Debt"
-"Issuance and Repurchase of Stock"
-"Payment of Dividends"
-"Net Cash Provided by Financing Activities"
-"Effect of Exchange Rate Changes on Cash"
-"Net Change in Cash and Cash Equivalents"
+Net Income
+Depreciation and Amortization
+Deferred Taxes
+Stock-Based Compensation
+Increase in Working Capital
+Decrease in Working Capital
+Change net in Working Capital
+Increase in Accounts Receivable
+Decrease in Accounts Receivable
+Change net in Accounts Receivable
+Increase in Inventory
+Decrease in Inventory
+Change net in Inventory
+Increase in Accounts Payable
+Decrease in Accounts Payable
+Change net in Accounts Payable
+Income Taxes Payable
+Other Working Capital
+Cash Flow from Others
+Net Cash Provided by Operating Activities
+"Acquisition of Property, Plant, and Equipment"
+"Disposition of Property, Plant, and Equipment"
+Purchases of Investments
+Sales of Investments
+Payment of Debt
+Issuance of Debt
+Issuance of Stock
+Repurchase of Stock
+Payment of Dividends
+Net Cash Provided by Financing Activities
+Effect of Exchange Rate Changes on Cash
+Net Change in Cash and Cash Equivalents
