@@ -1,5 +1,5 @@
 # File: api.R
-# Author: gp1981
+# Author: gp1981 with the contribution of ChatGPT4.0
 # Purpose: Handle interactions with the Finnhub.com API
 
 # api.R

@@ -1,5 +1,5 @@
 # File: utils.R
-# Author: gp1981
+# Author: gp1981 with the contribution of ChatGPT4.0
 # Purpose: Utility functions for data manipulation
 
 # Set the path to the data files

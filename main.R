@@ -1,6 +1,6 @@
 # main.R
 
-# Author: gp1981
+# Author: gp1981 with the contribution of ChatGPT4.0
 
 # Purpose: This script replicates the ranking of companies as per "The Little Book that Still Beats the Market" by J. Greenblatt. It uses data from the Finnhub API.
 
