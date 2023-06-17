@@ -1,33 +1,35 @@
-"standard name"
-Cash and Cash Equivalents
-Short-term Investments
-Accounts Receivable
-Inventory
-Prepaid Expenses
-Other Current Assets
-Total Current Assets
+"standard_name"
+"Cash and Cash Equivalents"
+"Short-term Investments"
+"Cash and Cash Equivalents and Short-term Investments"
+"Accounts Receivable"
+"Inventory"
+"Prepaid Expenses"
+"Other Current Assets"
+"Total Current Assets"
 "Gross Property, Plant and Equipment"
-Accumulated depreciation and ammortization
-"Net Property, Plant, and Equipment, after depreciation and ammortization"
-Total Intangible Assets
-Goodwill
-Intangible Assets Excluding Goodwill
-Other Long-term Assets
-Total Assets
-Accounts Payable
-Accrued Expenses
-Taxes Payable
-Notes Payable
-Deferred Taxes
-Deferred Revenue
-Current capital lease and long-term obbligations
-Total Current Liabilities
-Capital Lease and obbligations
-Long-term Debt
-Pension and other post-retirement benefits
-Total Liabilities
-Shareholder's Equity
-Retained Earnings
-Common Stock
-Treasury Stock
-Preferred Stock
+"Accumulated depreciation and amortization"
+"Net Property, Plant, and Equipment, after depreciation and amortization"
+"Total Intangible Assets"
+"Goodwill"
+"Intangible Assets Excluding Goodwill"
+"Other Long-term Assets"
+"Total Assets"
+"Accounts Payable"
+"Accrued Expenses"
+"Taxes Payable"
+"Notes Payable"
+"Deferred Taxes"
+"Deferred Revenue"
+"Current Capital Lease and Long-term Obligations"
+"Total Current Liabilities"
+"Capital Lease and Obligations"
+"Long-term Debt"
+"Pension and Other Post-retirement Benefits"
+"Total Liabilities"
+"Shareholders' Equity"
+"Retained Earnings"
+"Common Stock"
+"Additional Paid-In Capital"
+"Treasury Stock"
+"Preferred Stock"

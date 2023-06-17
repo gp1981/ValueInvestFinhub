@@ -64,9 +64,9 @@ extractConcepts <- function(financialsDF) {
   icConcepts <- concepts$income_statement
   cfConcepts <- concepts$cash_flow
   
-  summary_bsConcepts <- bsConcepts %>% group_by(concept) %>% distinct()
-  summary_icConcepts <- icConcepts %>% group_by(concept) %>% distinct()
-  summary_cfConcepts <- cfConcepts %>% group_by(concept) %>% distinct()
+  summary_bsConcepts <- bsConcepts %>% group_by(concept) %>% dplyr::summarise(n = n()) %>% mutate(percentage = n / sum(n) * 100)
+  summary_icConcepts <- icConcepts %>% group_by(concept) %>% dplyr::summarise(n = n()) %>% mutate(percentage = n / sum(n) * 100)
+  summary_cfConcepts <- cfConcepts %>% group_by(concept) %>% dplyr::summarise(n = n()) %>% mutate(percentage = n / sum(n) * 100)
   
   # Save the data frames as CSV files using file.path()
   write.csv(summary_bsConcepts, file = file.path(conceptsDir, "summary_bsConcepts.csv"), row.names = FALSE)
@@ -82,24 +82,38 @@ generateStandardNamesCSV <- function() {
   balanceSheetNames <- c(
     "Cash and Cash Equivalents",
     "Short-term Investments",
+    "Cash and Cash Equivalents and Short-term Investments",
     "Accounts Receivable",
     "Inventory",
     "Prepaid Expenses",
-    "Property, Plant, and Equipment",
-    "Intangible Assets",
+    "Other Current Assets",
+    "Total Current Assets",
+    "Gross Property, Plant and Equipment",
+    "Accumulated depreciation and amortization",
+    "Net Property, Plant, and Equipment, after depreciation and amortization",
+    "Total Intangible Assets",
     "Goodwill",
-    "Long-term Investments",
+    "Intangible Assets Excluding Goodwill",
+    "Other Long-term Assets",
+    "Total Assets",
     "Accounts Payable",
     "Accrued Expenses",
+    "Taxes Payable",
     "Notes Payable",
+    "Deferred Taxes",
     "Deferred Revenue",
+    "Current Capital Lease and Long-term Obligations",
+    "Total Current Liabilities",
+    "Capital Lease and Obligations",
     "Long-term Debt",
-    "Shareholder's Equity",
+    "Pension and Other Post-retirement Benefits",
+    "Total Liabilities",
+    "Shareholders' Equity",
     "Retained Earnings",
     "Common Stock",
+    "Additional Paid-In Capital",
     "Treasury Stock",
-    "Preferred Stock",
-    "Accumulated Other Comprehensive Income"
+    "Preferred Stock"
   )
   
   # Income Statement standard names
@@ -107,14 +121,13 @@ generateStandardNamesCSV <- function() {
     "Revenue",
     "Cost of Goods Sold",
     "Gross Profit",
-    "Operating Expenses",
     "Research and Development Expenses",
     "Selling, General, and Administrative Expenses",
     "Depreciation and Amortization",
     "Operating Income",
     "Interest Expense",
     "Income Before Taxes",
-    "Income Taxes",
+    "Income Taxes, tax provision",
     "Net Income",
     "Earnings Per Share (EPS)",
     "Diluted Earnings Per Share",
@@ -128,17 +141,30 @@ generateStandardNamesCSV <- function() {
     "Depreciation and Amortization",
     "Deferred Taxes",
     "Stock-Based Compensation",
-    "Changes in Working Capital",
-    "Accounts Receivable",
-    "Inventory",
-    "Accounts Payable",
+    "Increase in Working Capital",
+    "Decrease in Working Capital",
+    "Change in Net Working Capital",
+    "Increase in Accounts Receivable",
+    "Decrease in Accounts Receivable",
+    "Change in Net Accounts Receivable",
+    "Increase in Inventory",
+    "Decrease in Inventory",
+    "Change in Net Inventory",
+    "Increase in Accounts Payable",
+    "Decrease in Accounts Payable",
+    "Change in Net Accounts Payable",
     "Income Taxes Payable",
     "Other Working Capital",
+    "Cash Flow from Others",
     "Net Cash Provided by Operating Activities",
-    "Acquisition and Disposition of Property, Plant, and Equipment",
-    "Purchases and Sales of Investments",
-    "Issuance and Repayment of Debt",
-    "Issuance and Repurchase of Stock",
+    "Acquisition of Property, Plant, and Equipment",
+    "Disposition of Property, Plant, and Equipment",
+    "Purchases of Investments",
+    "Sales of Investments",
+    "Payment of Debt",
+    "Issuance of Debt",
+    "Issuance of Stock",
+    "Repurchase of Stock",
     "Payment of Dividends",
     "Net Cash Provided by Financing Activities",
     "Effect of Exchange Rate Changes on Cash",
@@ -146,9 +172,9 @@ generateStandardNamesCSV <- function() {
   )
   
   # Create data frames for balance sheet, income statement, and cash flow statement names
-  bsNamesDF <- data.frame(standard_names_BS = balanceSheetNames)
-  icNamesDF <- data.frame(standard_names_IC = incomeStatementNames)
-  cfNamesDF <- data.frame(standard_names_CF = cashFlowStatementNames)
+  bsNamesDF <- data.frame(standard_name = balanceSheetNames)
+  icNamesDF <- data.frame(standard_name = incomeStatementNames)
+  cfNamesDF <- data.frame(standard_name = cashFlowStatementNames)
   
   # Save data frames as CSV files
   write.csv(bsNamesDF, file = "data/standard_names/standard_names_BS.csv", row.names = FALSE)
@@ -156,101 +182,66 @@ generateStandardNamesCSV <- function() {
   write.csv(cfNamesDF, file = "data/standard_names/standard_names_CF.csv", row.names = FALSE)
 }
 
+
 library(dplyr)
 library(stringdist)
+library(stringr)
 
 # Function to create a mapping table of concepts and standard names of BS, IC, CF
 createMappingTable <- function() {
-  # Load concepts from CSV files
-  summary_bsConcepts <- read.csv(file.path(conceptsDir, "summary_bsConcepts.csv"))
-  summary_icConcepts <- read.csv(file.path(conceptsDir, "summary_icConcepts.csv"))
-  summary_cfConcepts <- read.csv(file.path(conceptsDir, "summary_cfConcepts.csv"))
+  # Load the standard names CSV files
+  bsNamesDF <- read.csv("data/standard_names/standard_names_BS.csv", stringsAsFactors = FALSE)
+  icNamesDF <- read.csv("data/standard_names/standard_names_IC.csv", stringsAsFactors = FALSE)
+  cfNamesDF <- read.csv("data/standard_names/standard_names_CF.csv", stringsAsFactors = FALSE)
   
-  # Load standard names from CSV files
-  standard_names_BS <- read.csv(file.path(standardNamesFile, "standard_names_BS.csv"))
-  standard_names_IC <- read.csv(file.path(standardNamesFile, "standard_names_IC.csv"))
-  standard_names_CF <- read.csv(file.path(standardNamesFile, "standard_names_CF.csv"))
+  # Extract the standard names from the data frames
+  standard_names_BS <- bsNamesDF$standard_name
+  standard_names_IC <- icNamesDF$standard_name
+  standard_names_CF <- cfNamesDF$standard_name
   
-  # Create mapping table
-  mappingTable <- list(
-    summary_bsConcepts = summary_bsConcepts,
-    summary_icConcepts = summary_icConcepts,
-    summary_cfConcepts = summary_cfConcepts,
-    standard_names_BS = standard_names_BS,
-    standard_names_IC = standard_names_IC,
-    standard_names_CF = standard_names_CF
-  )
-  
-  # Preprocess the concepts and standard names
-  preprocessText <- function(text) {
-    text <- tolower(text)
-    text <- trimws(text)
-    text <- gsub("[[:punct:]]", "", text)
-    return(text)
-  }
-  
-  # Preprocess the standard names
-  standard_names_BS$standard_name <- as.character(lapply(standard_names_BS$standard_name, preprocessText))
-  standard_names_IC$standard_name <- as.character(lapply(standard_names_IC$standard_name, preprocessText))
-  standard_names_CF$standard_name <- as.character(lapply(standard_names_CF$standard_name, preprocessText))
-  
-  # Load the concepts CSV files
-  bsConcepts <- read.csv(file.path(conceptsDir, "summary_bsConcepts.csv"), stringsAsFactors = FALSE)
-  icConcepts <- read.csv(file.path(conceptsDir, "summary_icConcepts.csv"), stringsAsFactors = FALSE)
-  cfConcepts <- read.csv(file.path(conceptsDir, "summary_cfConcepts.csv"), stringsAsFactors = FALSE)
-  
-  # Preprocess the concept data frames
-  bsConcepts$concept <- as.character(lapply(bsConcepts$concept, preprocessText))
-  icConcepts$concept <- as.character(lapply(icConcepts$concept, preprocessText))
-  cfConcepts$concept <- as.character(lapply(cfConcepts$concept, preprocessText))
-  
-  # Initialize the mapping table
-  mappingTable <- data.frame(concept = character(),
-                             standard_name = character(),
-                             similarity_score = numeric(),
-                             stringsAsFactors = FALSE)
-  
-  # Function to find the best match between a concept and standard names
-  findBestMatch <- function(concept, standardNames) {
-    scores <- stringdist::stringdistmatrix(concept, standardNames$standard_name, method = "jw")
-    maxScore <- max(scores)
-    bestMatchIndices <- which(scores == maxScore, arr.ind = TRUE)
-    bestMatches <- standardNames[bestMatchIndices[, "row"], ]
-    bestMatches$score <- maxScore
-    return(bestMatches)
-  }
-  
-  # Iterate over the concepts and standard names
-  mapConcepts <- function(concepts, standardNames) {
-    mapping <- data.frame(concept = character(),
-                          standard_name = character(),
-                          similarity_score = numeric(),
-                          stringsAsFactors = FALSE)
+  # Function to split words and remove prefixes
+  split_words <- function(input_string, split_chars) {
+    # Create a pattern to match any of the split_chars
+    split_pattern <- paste0("[", paste0(split_chars, collapse = "|"), "]")
     
-    for (i in 1:nrow(concepts)) {
-      concept <- concepts[i, "concept"]
-      matches <- findBestMatch(concept, standardNames)
+    # Replace split_chars with a space
+    cleaned_string <- gsub(split_pattern, " ", input_string)
+    
+    # Split the cleaned_string into words
+    words <- str_split(cleaned_string, "(?<=.)(?=[A-Z][a-z])", simplify = TRUE)
+    
+    # Return the words
+    return(words)
+  }
+  
+  # Function to map concepts to standard names
+  mapConcepts <- function(concepts, standard_names) {
+    mapping <- data.frame(concept = character(0), standard_name = character(0), stringsAsFactors = FALSE)
+    
+    for (concept in concepts) {
+      # Split concept into words and remove prefixes
+      concept_words <- split_words(concept, c(":", "_"))
       
-      mapping <- rbind(mapping, data.frame(concept = rep(concept, nrow(matches)),
-                                           standard_name = matches$standard_name,
-                                           similarity_score = matches$score,
-                                           stringsAsFactors = FALSE))
+      # Calculate string distances between concept words and standard names
+      distances <- stringdist::stringdistmatrix(concept_words, standard_names)
+      
+      # Find the minimum distance and its corresponding standard name
+      min_distances <- apply(distances, 1, min)
+      match <- standard_names[apply(distances, 1, which.min)]
+      
+      # Add the mapping to the data frame
+      mapping <- rbind(mapping, data.frame(concept = concept, standard_name = match, stringsAsFactors = FALSE))
     }
     
     return(mapping)
   }
   
-  # Map the concepts to standard names for each financial statement
-  mapping_bsConcepts <- mapConcepts(bsConcepts, standard_names_BS)
-  mapping_icConcepts <- mapConcepts(icConcepts, standard_names_IC)
-  mapping_cfConcepts <- mapConcepts(cfConcepts, standard_names_CF)
-  
-  # Combine the mappings for all financial statements
-  mappingTable <- rbind(mappingTable, mapping_bsConcepts, mapping_icConcepts, mapping_cfConcepts)
-  
-  # Sort the mapping table by concept and similarity score
-  mappingTable <- mappingTable %>%
-    arrange(concept, desc(similarity_score))
+  # Map concepts to standard names for balance sheet, income statement, and cash flow statement
+  mappingTable <- list(
+    bs = mapConcepts(summary_concepts$summary_bsConcepts, standard_names_BS),
+    ic = mapConcepts(summary_concepts$summary_icConcepts, standard_names_IC),
+    cf = mapConcepts(summary_concepts$summary_cfConcepts, standard_names_CF)
+  )
   
   return(mappingTable)
 }

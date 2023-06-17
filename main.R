@@ -52,7 +52,7 @@ financialsDF <- retrieveFinancials(filteredDF, API_KEY)
 summary_concepts <- extractConcepts(financialsDF)
 
 # Generate CSV files for standard names
-generateStandardNamesCSV()
+# generateStandardNamesCSV()
 
 # Create the mapping table
 mappingTable <- createMappingTable()
