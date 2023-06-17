@@ -70,8 +70,8 @@ extractConcepts <- function(financialsDF) {
   
   # Save the data frames as CSV files using file.path()
   write.csv(summary_bsConcepts, file = file.path(conceptsDir, "summary_bsConcepts.csv"), row.names = FALSE)
-  write.csv(summary_bsConcepts, file = file.path(conceptsDir, "summary_icConcepts.csv"), row.names = FALSE)
-  write.csv(summary_bsConcepts, file = file.path(conceptsDir, "summary_cfConcepts.csv"), row.names = FALSE)
+  write.csv(summary_icConcepts, file = file.path(conceptsDir, "summary_icConcepts.csv"), row.names = FALSE)
+  write.csv(summary_cfConcepts, file = file.path(conceptsDir, "summary_cfConcepts.csv"), row.names = FALSE)
   
   return(list(summary_bsConcepts = summary_bsConcepts, summary_icConcepts = summary_icConcepts, summary_cfConcepts = summary_cfConcepts))
 }
