@@ -57,4 +57,5 @@ When creating branches, please use descriptive names that indicate the purpose o
 -   *docs*-*branch-name*: Use this prefix for branches that involve documentation updates or improvements. Choose a branch name that clearly represents the purpose of the branch and provides context to other contributors.
 
 ## ChatGPT link
+To use the chatGPT4.0 for this repository, refer to: 
 [GitHub: ValueInvestFinnhub](https://chat.openai.com/share/06d3c853-5b08-431b-b534-0d361bcb6b1d)
