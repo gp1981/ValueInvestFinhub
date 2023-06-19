@@ -3,11 +3,11 @@
 # Purpose: Utility functions for data manipulation
 
 # Set the path to the data files
-  # Set the path to the concepts directory
-  conceptsDir <- "data/concepts/"
-  
-  # Set the file path for the standard names CSV file
-  standardNamesFile <- "data/standard_names/"
+# Set the path to the concepts directory
+conceptsDir <- "data/concepts/"
+
+# Set the file path for the standard names CSV file
+standardNamesFile <- "data/standard_names/"
 
 # Function to create a pivot table of industries in commonStocksDF
 createIndustryPivot <- function(commonStocksDF) {
@@ -59,14 +59,17 @@ extractConcepts <- function(financialsDF) {
   }
   
   concepts<- list(balance_sheet = bsConcepts, income_statement = icConcepts, cash_flow = cfConcepts)
-
+  
   bsConcepts <- concepts$balance_sheet
   icConcepts <- concepts$income_statement
   cfConcepts <- concepts$cash_flow
   
-  summary_bsConcepts <- bsConcepts %>% group_by(concept) %>% dplyr::summarise(n = n()) %>% mutate(percentage = n / sum(n) * 100)
-  summary_icConcepts <- icConcepts %>% group_by(concept) %>% dplyr::summarise(n = n()) %>% mutate(percentage = n / sum(n) * 100)
-  summary_cfConcepts <- cfConcepts %>% group_by(concept) %>% dplyr::summarise(n = n()) %>% mutate(percentage = n / sum(n) * 100)
+  summary_bsConcepts <- bsConcepts %>% group_by(concept) %>% dplyr::summarise(n = n()) %>% 
+    mutate(percentage = n / sum(n) * 100) %>% arrange(desc(percentage)) %>% mutate(cumulative_percentage = cumsum(percentage))
+  summary_icConcepts <- icConcepts %>% group_by(concept) %>% dplyr::summarise(n = n()) %>% 
+    mutate(percentage = n / sum(n) * 100) %>% arrange(desc(percentage)) %>% mutate(cumulative_percentage = cumsum(percentage))
+  summary_cfConcepts <- cfConcepts %>% group_by(concept) %>% dplyr::summarise(n = n()) %>% 
+    mutate(percentage = n / sum(n) * 100) %>% arrange(desc(percentage)) %>% mutate(cumulative_percentage = cumsum(percentage))
   
   # Save the data frames as CSV files using file.path()
   write.csv(summary_bsConcepts, file = file.path(conceptsDir, "summary_bsConcepts.csv"), row.names = FALSE)
@@ -219,8 +222,11 @@ createMappingTable <- function() {
     mapping <- data.frame(concept = character(0), standard_name = character(0), stringsAsFactors = FALSE)
     
     for (concept in concepts) {
-      # Split concept into words and remove prefixes
-      concept_words <- split_words(concept, c(":", "_"))
+      # Remove prefixes from concept
+      concept_cleaned <- gsub("^[^_: ]*[:_ ]", "", concept)
+      
+      # Split concept into words
+      concept_words <- str_split(concept_cleaned, "\\W+")[[1]]
       
       # Calculate string distances between concept words and standard names
       distances <- stringdist::stringdistmatrix(concept_words, standard_names)
@@ -245,3 +251,22 @@ createMappingTable <- function() {
   
   return(mappingTable)
 }
+
+get_symbols_by_concept <- function(type_of_statement, concept_description, year, quarter) {
+  # Filter the financialsDF based on year and quarter
+  filtered_df <- financialsDF[financialsDF$year == year & financialsDF$quarter == quarter, ]
+  
+  # Retrieve the specified type of statement
+  statement <- filtered_df$report[[type_of_statement]]
+  
+  # Filter the statement based on concept description
+  filtered_statement <- statement[sapply(statement, function(x) concept_description %in% x$concept)]
+  
+  # Extract the symbols from the filtered statement
+  symbols <- filtered_df$symbol
+  
+  # Return the symbols
+  symbols <- as.data.frame(symbols)
+}
+
+
