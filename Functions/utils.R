@@ -33,7 +33,7 @@ cleanCommonStocksDF <- function(commonStocksDF) {
 }
 
 # Function to filter companies based on exclusion criteria and minimum market capitalization
-filterCompanies <- function(df, excludedIndustries = c("Utilities", "Banking", "Insurance"), allowedCountries = c("US", "CA"), minMarketCapMillionUSD = 0) {
+filterCompanies <- function(df, excludedIndustries = c("Utilities", "Banking", "Insurance", "Financial Services"), allowedCountries = c("US", "CA"), minMarketCapMillionUSD = 0) {
   filteredDF <- df %>%
     filter(!finnhubIndustry %in% excludedIndustries) %>%
     filter(country %in% allowedCountries) %>%
@@ -252,7 +252,8 @@ createMappingTable <- function() {
   return(mappingTable)
 }
 
-get_symbols_by_concept <- function(type_of_statement, concept_description, year, quarter) {
+# Extract the list of symbols and last financial statement providing type of statement, concept, year and quarter
+get_last_statements_by_symbol <- function(type_of_statement, concept_description, year, quarter) {
   # Filter the financialsDF based on year and quarter
   filtered_df <- financialsDF[financialsDF$year == year & financialsDF$quarter == quarter, ]
   
@@ -265,8 +266,17 @@ get_symbols_by_concept <- function(type_of_statement, concept_description, year,
   # Extract the symbols from the filtered statement
   symbols <- filtered_df$symbol
   
-  # Return the symbols
-  symbols <- as.data.frame(symbols)
+  # Create an empty list to store the last statements
+  last_statements <- list()
+  
+  # Retrieve the last statement for each symbol
+  for (symbol in symbols) {
+    symbol_financials <- financialsDF[financialsDF$symbol == symbol, ]
+    last_statement <- tail(symbol_financials$report[[type_of_statement]], 1)
+    last_statements[[symbol]] <- last_statement
+  }
+  
+  # Return the symbols and the last statements
+  result <- list(symbols = symbols, last_statements = last_statements)
+  return(result)
 }
-
-

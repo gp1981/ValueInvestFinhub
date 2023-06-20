@@ -1,53 +1,53 @@
 concept,standard_name
-us-gaap_LiabilitiesAndStockholdersEquity,Standard Name 1
-us-gaap_Assets,Standard Name 2
-us-gaap_RetainedEarningsAccumulatedDeficit,Standard Name 3
-us-gaap_StockholdersEquity,
-us-gaap_LiabilitiesCurrent,
-us-gaap_AssetsCurrent,
-us-gaap_CashAndCashEquivalentsAtCarryingValue,
-us-gaap_PropertyPlantAndEquipmentNet,
-us-gaap_CommonStockValue,
-us-gaap_Liabilities,
-us-gaap_OtherAssetsNoncurrent,
-us-gaap_Goodwill,
-us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax,
-us-gaap_AccountsPayableCurrent,
-us-gaap_OtherLiabilitiesNoncurrent,
-us-gaap_PrepaidExpenseAndOtherAssetsCurrent,
-us-gaap_AccountsReceivableNetCurrent,
-us-gaap_AdditionalPaidInCapital,
-us-gaap_IntangibleAssetsNetExcludingGoodwill,
-us-gaap_InventoryNet,
-us-gaap_AccruedLiabilitiesCurrent,
-us-gaap_TreasuryStockValue,
-us-gaap_AdditionalPaidInCapitalCommonStock,
-us-gaap_LongTermDebtNoncurrent,
-us-gaap_OperatingLeaseRightOfUseAsset,
-us-gaap_StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest,
-us-gaap_PreferredStockValue,
-us-gaap_OperatingLeaseLiabilityNoncurrent,
-us-gaap_LongTermDebtCurrent,
-us-gaap_MinorityInterest,
-us-gaap_EmployeeRelatedLiabilitiesCurrent,
-us-gaap_OperatingLeaseLiabilityCurrent,
-us-gaap_OtherAssetsCurrent,
-us-gaap_OtherLiabilitiesCurrent,
-us-gaap_DeferredIncomeTaxLiabilitiesNet,
-us-gaap_DeferredTaxLiabilitiesNoncurrent,
-us-gaap_PrepaidExpenseCurrent,
-LiabilitiesAndStockholdersEquity,
-Assets,
-us-gaap_LongTermDebtAndCapitalLeaseObligations,
-RetainedEarningsAccumulatedDeficit,
-StockholdersEquity,
-us-gaap_ContractWithCustomerLiabilityCurrent,
-LiabilitiesCurrent,
-AssetsCurrent,
-us-gaap_AccountsPayableAndAccruedLiabilitiesCurrent,
-PropertyPlantAndEquipmentNet,
-us-gaap_LongTermDebtAndCapitalLeaseObligationsCurrent,
-CashAndCashEquivalentsAtCarryingValue,
+us-gaap_LiabilitiesAndStockholdersEquity,Total Liabilities and Stockholders' Equity
+us-gaap_Assets,Total Assets
+us-gaap_RetainedEarningsAccumulatedDeficit,Retained Earnings and Accumulated Deficit
+us-gaap_StockholdersEquity,Shareholders' Equity
+us-gaap_LiabilitiesCurrent,Total Current Liabilities
+us-gaap_AssetsCurrent,Total Current Assets
+us-gaap_CashAndCashEquivalentsAtCarryingValue,Cash and Cash Equivalents and Short-term Investments
+us-gaap_PropertyPlantAndEquipmentNet,"Net Property, Plant, and Equipment, after depreciation and amortization"
+us-gaap_CommonStockValue,Cash and Cash Equivalents and Short-term Investments
+us-gaap_Liabilities,Total Liabilities
+us-gaap_OtherAssetsNoncurrent,Other Long-term Assets
+us-gaap_Goodwill,Goodwill
+us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax,Retained Earnings and Accumulated Deficit
+us-gaap_AccountsPayableCurrent,Accounts Payable
+us-gaap_OtherLiabilitiesNoncurrent,Other Long-term Liabilities
+us-gaap_PrepaidExpenseAndOtherAssetsCurrent,Prepaid Expenses
+us-gaap_AccountsReceivableNetCurrent,Accounts Receivable
+us-gaap_AdditionalPaidInCapital,Additional Paid-In Capital
+us-gaap_IntangibleAssetsNetExcludingGoodwill,Intangible Assets Excluding Goodwill
+us-gaap_InventoryNet,Inventory
+us-gaap_AccruedLiabilitiesCurrent,Total Current Liabilities
+us-gaap_TreasuryStockValue,Treasury Stock
+us-gaap_AdditionalPaidInCapitalCommonStock,Additional Paid-In Capital
+us-gaap_LongTermDebtNoncurrent,Long-term Debt
+us-gaap_OperatingLeaseRightOfUseAsset,Current Capital Lease and Long-term Obligations
+us-gaap_StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest,Shareholders' Equity
+us-gaap_PreferredStockValue,Preferred Stock
+us-gaap_OperatingLeaseLiabilityNoncurrent,Other Long-term Liabilities
+us-gaap_LongTermDebtCurrent,Current Capital Lease and Long-term Obligations
+us-gaap_MinorityInterest,Minority Interest
+us-gaap_EmployeeRelatedLiabilitiesCurrent,Other Current Liabilities
+us-gaap_OperatingLeaseLiabilityCurrent,Other Current Liabilities
+us-gaap_OtherAssetsCurrent,Other Current Assets
+us-gaap_OtherLiabilitiesCurrent,Other Current Liabilities
+us-gaap_DeferredIncomeTaxLiabilitiesNet,Taxes Payable
+us-gaap_DeferredTaxLiabilitiesNoncurrent,Other Long-term Liabilities
+us-gaap_PrepaidExpenseCurrent,Prepaid Expenses
+LiabilitiesAndStockholdersEquity,Total Liabilities and Stockholders' Equity
+Assets,Total Assets
+us-gaap_LongTermDebtAndCapitalLeaseObligations,Long-term Debt
+RetainedEarningsAccumulatedDeficit,Retained Earnings and Accumulated Deficit
+StockholdersEquity,Shareholders' Equity
+us-gaap_ContractWithCustomerLiabilityCurrent,Other Current Liabilities
+LiabilitiesCurrent,Other Current Assets
+AssetsCurrent,Total Current Assets
+us-gaap_AccountsPayableAndAccruedLiabilitiesCurrent,Accounts Payable
+PropertyPlantAndEquipmentNet,"Net Property, Plant, and Equipment, after depreciation and amortization"
+us-gaap_LongTermDebtAndCapitalLeaseObligationsCurrent,Long-term Debt
+CashAndCashEquivalentsAtCarryingValue,Cash and Cash Equivalents and Short-term Investments
 us-gaap_DeferredIncomeTaxAssetsNet,
 us-gaap_NetIncomeLoss,
 us-gaap_OperatingIncomeLoss,

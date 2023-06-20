@@ -19,7 +19,7 @@ getStockSymbols <- function() {
   return(stockSymbols)
 }
 
-# Main function to filter common stocks from stock symbols
+# Function to filter common stocks from stock symbols
 filterCommonStocks <- function(stockSymbols) {
   symbols_df <- as.data.frame(stockSymbols)
   commonStocks <- symbols_df %>% filter(type == "Common Stock")
