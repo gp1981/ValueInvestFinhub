@@ -48,29 +48,45 @@ us-gaap_AccountsPayableAndAccruedLiabilitiesCurrent,Accounts Payable
 PropertyPlantAndEquipmentNet,"Net Property, Plant, and Equipment, after depreciation and amortization"
 us-gaap_LongTermDebtAndCapitalLeaseObligationsCurrent,Long-term Debt
 CashAndCashEquivalentsAtCarryingValue,Cash and Cash Equivalents and Short-term Investments
-us-gaap_DeferredIncomeTaxAssetsNet,
-us-gaap_NetIncomeLoss,
-us-gaap_OperatingIncomeLoss,
-us-gaap_IncomeTaxExpenseBenefit,
-us-gaap_EarningsPerShareBasic,
-us-gaap_EarningsPerShareDiluted,
-us-gaap_WeightedAverageNumberOfSharesOutstandingBasic,
-us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding,
-us-gaap_ComprehensiveIncomeNetOfTax,
-us-gaap_OtherNonoperatingIncomeExpense,
-us-gaap_InterestExpense,
-us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest,
-us-gaap_GeneralAndAdministrativeExpense,
-us-gaap_OperatingExpenses,
-us-gaap_GrossProfit,
-us-gaap_SellingGeneralAndAdministrativeExpense,
-us-gaap_ResearchAndDevelopmentExpense,
-us-gaap_NonoperatingIncomeExpense,
-us-gaap_Revenues,
-us-gaap_OtherComprehensiveIncomeLossForeignCurrencyTransactionAndTranslationAdjustmentNetOfTax,
-us-gaap_CostOfGoodsAndServicesSold,
-us-gaap_ProfitLoss,
-us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax,
+,Revenue
+,Cost of Goods Sold
+,Gross Profit
+,Research and Development Expenses
+,"Selling, General, and Administrative Expenses"
+,Depreciation and Amortization
+,Operating Income
+,Interest Expense
+,Income Before Taxes
+,"Income Taxes, tax provision"
+,Net Income
+,Earnings Per Share (EPS)
+,Diluted Earnings Per Share
+,Extraordinary Items
+,Discontinued Operations
+,"Income Taxes, tax provision"
+us-gaap_DeferredIncomeTaxAssetsNet,"Income Taxes, tax provision"
+us-gaap_NetIncomeLoss,Net Income
+us-gaap_OperatingIncomeLoss,Operating Income
+us-gaap_IncomeTaxExpenseBenefit,"Income Taxes, tax provision"
+us-gaap_EarningsPerShareBasic,Earnings Per Share (EPS)
+us-gaap_EarningsPerShareDiluted,Diluted Earnings Per Share
+us-gaap_WeightedAverageNumberOfSharesOutstandingBasic,Weighted Number of Shares Outstanding
+us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding,Weighted Number of Shares Outstanding
+us-gaap_ComprehensiveIncomeNetOfTax,Net Income
+us-gaap_OtherNonoperatingIncomeExpense,"Selling, General, and Administrative Expenses"
+us-gaap_InterestExpense,Interest Expense
+us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest,Income Before Taxes
+us-gaap_GeneralAndAdministrativeExpense,"Selling, General, and Administrative Expenses"
+us-gaap_OperatingExpenses,"Selling, General, and Administrative Expenses"
+us-gaap_GrossProfit,Gross Profit
+us-gaap_SellingGeneralAndAdministrativeExpense,"Selling, General, and Administrative Expenses"
+us-gaap_ResearchAndDevelopmentExpense,Research and Development Expenses
+us-gaap_NonoperatingIncomeExpense,"Selling, General, and Administrative Expenses"
+us-gaap_Revenues,Revenue
+us-gaap_OtherComprehensiveIncomeLossForeignCurrencyTransactionAndTranslationAdjustmentNetOfTax,Net Income
+us-gaap_CostOfGoodsAndServicesSold,Cost of Goods Sold
+us-gaap_ProfitLoss,Net Income
+us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax,Revenue
 us-gaap_OtherComprehensiveIncomeLossNetOfTax,
 us-gaap_ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest,
 us-gaap_IncomeLossFromEquityMethodInvestments,
