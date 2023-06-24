@@ -253,46 +253,24 @@ createMappingTable <- function() {
 }
 
 # Extract the list of symbols and last financial statement providing type of statement, concept, year and quarter
-get_last_statements_by_symbol <- function(type_of_statement, concept_description, year, quarter) {
-  # Filter the financialsDF based on year and quarter
-  filtered_df <- financialsDF[financialsDF$year == year & financialsDF$quarter == quarter, ]
-  
-  # Retrieve the specified type of statement
-  statement <- filtered_df$report[[type_of_statement]]
-  
-  # Filter the statement based on concept description
-  filtered_statement <- statement[sapply(statement, function(x) concept_description %in% x$concept)]
-  
-  # Extract the symbols from the filtered statement
-  symbols <- filtered_df$symbol
-  
-  # Create an empty list to store the last statements
-  last_statements <- list()
-  
-  # Retrieve the last statement for each symbol
-  for (symbol in symbols) {
-    symbol_financials <- financialsDF[financialsDF$symbol == symbol, ]
-    last_statement <- tail(symbol_financials$report[[type_of_statement]], 1)
-    last_statements[[symbol]] <- last_statement
-  }
-  
-  # Return the symbols and the last statements
-  result <- list(symbols = symbols, last_statements = last_statements)
-  return(result)
-}
-
-# Extract financial data
-
 extract_financials_data <- function(mapping_table_path, financials_data) {
   # Read the mapping table
   mapping_table <- read.csv(mapping_table_path, stringsAsFactors = FALSE)
   
   # Create an empty data frame to store the extracted data
   extracted_data <- data.frame(symbol = character(),
-                               year = numeric(),
-                               quarter = character(),
+                               year = integer(),
+                               quarter = integer(),
                                filedDate = character(),
                                stringsAsFactors = FALSE)
+  
+  # Get all unique standard names from the mapping table
+  standard_names <- unique(mapping_table$standard_name)
+  
+  # Add columns for each standard name to extracted_data
+  for (name in standard_names) {
+    extracted_data[[name]] <- NA
+  }
   
   # Iterate over each symbol, year, and quarter
   for (i in 1:length(financials_data$report$bs)) {
@@ -301,21 +279,11 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
     ic_data <- financials_data$report$ic[[i]]
     cf_data <- financials_data$report$cf[[i]]
     
-    # Extract the symbol, year, quarter, and filedDate
-    symbol <- bs_data$symbol
-    year <- bs_data$year
-    quarter <- bs_data$quarter
-    filedDate <- bs_data$filedDate
-    
-    # Extract the relevant concepts and their corresponding values
-    bs_concepts <- unlist(bs_data$concept)
-    bs_values <- unlist(bs_data$value)
-    
-    ic_concepts <- unlist(ic_data$concept)
-    ic_values <- unlist(ic_data$value)
-    
-    cf_concepts <- unlist(cf_data$concept)
-    cf_values <- unlist(cf_data$value)
+    # Extract the symbol, year, quarter, and filedDate from financialsDF using index i
+    symbol <- financials_data$symbol[i]
+    year <- financials_data$year[i]
+    quarter <- financials_data$quarter[i]
+    filedDate <- financials_data$filedDate[i]
     
     # Create a data frame for the current symbol, year, and quarter
     df <- data.frame(symbol = symbol,
@@ -324,35 +292,43 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
                      filedDate = filedDate,
                      stringsAsFactors = FALSE)
     
+    # Add missing columns to df with NA values
+    missing_columns <- setdiff(names(extracted_data), names(df))
+    for (col in missing_columns) {
+      df[[col]] <- NA
+    }
+    
     # Iterate over each concept in the mapping table
     for (j in 1:nrow(mapping_table)) {
-      concept <- mapping_table$concepts[j]
+      concept <- mapping_table$concept[j]
       standard_name <- mapping_table$standard_name[j]
       
       # Check if the concept is present in the bs_concepts and extract the corresponding value
-      if (concept %in% bs_concepts) {
-        bs_value <- bs_values[which(bs_concepts == concept)]
+      if (concept %in% bs_data$concept) {
+        bs_value <- bs_data$value[match(concept, bs_data$concept)]
         df[[standard_name]] <- bs_value
       }
       
       # Check if the concept is present in the ic_concepts and extract the corresponding value
-      if (concept %in% ic_concepts) {
-        ic_value <- ic_values[which(ic_concepts == concept)]
+      if (concept %in% ic_data$concept) {
+        ic_value <- ic_data$value[match(concept, ic_data$concept)]
         df[[standard_name]] <- ic_value
       }
       
       # Check if the concept is present in the cf_concepts and extract the corresponding value
-      if (concept %in% cf_concepts) {
-        cf_value <- cf_values[which(cf_concepts == concept)]
+      if (concept %in% cf_data$concept) {
+        cf_value <- cf_data$value[match(concept, cf_data$concept)]
         df[[standard_name]] <- cf_value
       }
     }
     
     # Append the current symbol's data to the extracted_data data frame
-    extracted_data <- bind_rows(extracted_data, df)
+    extracted_data <- rbind(extracted_data, df)
   }
   
-  # Return the extracted_data data frame
+  # Reset row names
+  rownames(extracted_data) <- NULL
+  
   return(extracted_data)
 }
 
