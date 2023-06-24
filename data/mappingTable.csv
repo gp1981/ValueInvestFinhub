@@ -48,22 +48,6 @@ us-gaap_AccountsPayableAndAccruedLiabilitiesCurrent,Accounts Payable
 PropertyPlantAndEquipmentNet,"Net Property, Plant, and Equipment, after depreciation and amortization"
 us-gaap_LongTermDebtAndCapitalLeaseObligationsCurrent,Long-term Debt
 CashAndCashEquivalentsAtCarryingValue,Cash and Cash Equivalents and Short-term Investments
-,Revenue
-,Cost of Goods Sold
-,Gross Profit
-,Research and Development Expenses
-,"Selling, General, and Administrative Expenses"
-,Depreciation and Amortization
-,Operating Income
-,Interest Expense
-,Income Before Taxes
-,"Income Taxes, tax provision"
-,Net Income
-,Earnings Per Share (EPS)
-,Diluted Earnings Per Share
-,Extraordinary Items
-,Discontinued Operations
-,"Income Taxes, tax provision"
 us-gaap_DeferredIncomeTaxAssetsNet,"Income Taxes, tax provision"
 us-gaap_NetIncomeLoss,Net Income
 us-gaap_OperatingIncomeLoss,Operating Income
@@ -116,52 +100,52 @@ us-gaap_InterestIncomeExpenseNet,Interest Expense
 EarningsPerShareBasic,Earnings Per Share (EPS)
 WeightedAverageNumberOfDilutedSharesOutstanding,Weighted Number of Shares Outstanding
 us-gaap_ShareBasedCompensation,
-us-gaap_NetCashProvidedByUsedInOperatingActivities,
-us-gaap_NetCashProvidedByUsedInFinancingActivities,
-us-gaap_NetCashProvidedByUsedInInvestingActivities,
-us-gaap_PaymentsToAcquirePropertyPlantAndEquipment,
-us-gaap_NetIncomeLoss,
-us-gaap_IncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets,
-us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease,
-us-gaap_DepreciationDepletionAndAmortization,
-us-gaap_IncreaseDecreaseInAccountsReceivable,
-us-gaap_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect,
-us-gaap_IncreaseDecreaseInInventories,
-us-gaap_IncreaseDecreaseInAccountsPayable,
-us-gaap_DeferredIncomeTaxExpenseBenefit,
-us-gaap_RepaymentsOfLongTermDebt,
-us-gaap_PaymentsForRepurchaseOfCommonStock,
-us-gaap_ProfitLoss,
-us-gaap_ProceedsFromStockOptionsExercised,
-us-gaap_IncreaseDecreaseInAccountsPayableAndAccruedLiabilities,
-us-gaap_OtherNoncashIncomeExpense,
-us-gaap_NetCashProvidedByUsedInOperatingActivitiesContinuingOperations,
-us-gaap_InterestPaidNet,
-us-gaap_IncreaseDecreaseInOtherOperatingAssets,
-us-gaap_ProceedsFromSaleOfPropertyPlantAndEquipment,
-us-gaap_IncreaseDecreaseInAccruedLiabilities,
-us-gaap_PaymentsForProceedsFromOtherInvestingActivities,
-us-gaap_NetCashProvidedByUsedInInvestingActivitiesContinuingOperations,
-us-gaap_PaymentsToAcquireBusinessesNetOfCashAcquired,
-us-gaap_EffectOfExchangeRateOnCashAndCashEquivalents,
-us-gaap_DepreciationAndAmortization,
-us-gaap_ProceedsFromIssuanceOfCommonStock,
-us-gaap_NetCashProvidedByUsedInFinancingActivitiesContinuingOperations,
+us-gaap_NetCashProvidedByUsedInOperatingActivities,Net Cash Provided by Operating Activities
+us-gaap_NetCashProvidedByUsedInFinancingActivities,Net Cash Provided by Financing Activities
+us-gaap_NetCashProvidedByUsedInInvestingActivities,Net Cash Provided by Investing Activities
+us-gaap_PaymentsToAcquirePropertyPlantAndEquipment,"Acquisition of Property, Plant, and Equipment"
+us-gaap_NetIncomeLoss,Net Income
+us-gaap_IncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets,Change in Net Working Capital
+us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease,Net Change in Cash and Cash Equivalents
+us-gaap_DepreciationDepletionAndAmortization,Depreciation and Amortization
+us-gaap_IncreaseDecreaseInAccountsReceivable,Change in Net Accounts Receivable
+us-gaap_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect,Net Change in Cash and Cash Equivalents Excluding Exchange Rate Changes on Cash
+us-gaap_IncreaseDecreaseInInventories,Change in Net Inventory
+us-gaap_IncreaseDecreaseInAccountsPayable,Change in Net Accounts Payable
+us-gaap_DeferredIncomeTaxExpenseBenefit,Decrease in Working Capital
+us-gaap_RepaymentsOfLongTermDebt,Payment of Debt
+us-gaap_PaymentsForRepurchaseOfCommonStock,Payment to Repurchase of Stock
+us-gaap_ProfitLoss,Net Income
+us-gaap_ProceedsFromStockOptionsExercised,Stock-Based Compensation
+us-gaap_IncreaseDecreaseInAccountsPayableAndAccruedLiabilities,Change in Net Accounts Payable
+us-gaap_OtherNoncashIncomeExpense,Change in Net Working Capital
+us-gaap_NetCashProvidedByUsedInOperatingActivitiesContinuingOperations,Net Cash Provided by Operating Activities
+us-gaap_InterestPaidNet,Payment of Debt
+us-gaap_IncreaseDecreaseInOtherOperatingAssets,Change in Net Working Capital
+us-gaap_ProceedsFromSaleOfPropertyPlantAndEquipment,"Disposition of Property, Plant, and Equipment"
+us-gaap_IncreaseDecreaseInAccruedLiabilities,Change in Net Working Capital
+us-gaap_PaymentsForProceedsFromOtherInvestingActivities,Sales of Investments
+us-gaap_NetCashProvidedByUsedInInvestingActivitiesContinuingOperations,Net Cash Provided by Investing Activities
+us-gaap_PaymentsToAcquireBusinessesNetOfCashAcquired,Purchase of investment
+us-gaap_EffectOfExchangeRateOnCashAndCashEquivalents,Effect of Exchange Rate Changes on Cash
+us-gaap_DepreciationAndAmortization,Depreciation and Amortization
+us-gaap_ProceedsFromIssuanceOfCommonStock,Issuance of Stock
+us-gaap_NetCashProvidedByUsedInFinancingActivitiesContinuingOperations,Net Cash Provided by Financing Activities
 us-gaap_PaymentsRelatedToTaxWithholdingForShareBasedCompensation,
-us-gaap_ProceedsFromIssuanceOfLongTermDebt,
+us-gaap_ProceedsFromIssuanceOfLongTermDebt,Issuance of Debt
 us-gaap_ProvisionForDoubtfulAccounts,
 us-gaap_IncomeTaxesPaidNet,
-us-gaap_IncreaseDecreaseInReceivables,
-us-gaap_ProceedsFromPaymentsForOtherFinancingActivities,
-us-gaap_PaymentsOfDividendsCommonStock,
-us-gaap_EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents,
-us-gaap_IncreaseDecreaseInContractWithCustomerLiability,
-us-gaap_IncomeLossFromEquityMethodInvestments,
-NetCashProvidedByUsedInOperatingActivities,
-NetCashProvidedByUsedInFinancingActivities,
-us-gaap_CapitalExpendituresIncurredButNotYetPaid,
-ShareBasedCompensation,
-us-gaap_PaymentsOfDividends,
-NetCashProvidedByUsedInInvestingActivities,
-us-gaap_PaymentsToAcquireProductiveAssets,
-us-gaap_AmortizationOfFinancingCosts,
+us-gaap_IncreaseDecreaseInReceivables,Change in Net Accounts Receivable
+us-gaap_ProceedsFromPaymentsForOtherFinancingActivities,Proceeds from Payment for Other Financing Activities
+us-gaap_PaymentsOfDividendsCommonStock,Payment of Dividends
+us-gaap_EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents,Effect of Exchange Rate Changes on Cash
+us-gaap_IncreaseDecreaseInContractWithCustomerLiability,Change in Net Accounts Payable
+us-gaap_IncomeLossFromEquityMethodInvestments,Stock-Based Compensation
+NetCashProvidedByUsedInOperatingActivities,Net Cash Provided by Operating Activities
+NetCashProvidedByUsedInFinancingActivities,Net Cash Provided by Financing Activities
+us-gaap_CapitalExpendituresIncurredButNotYetPaid,"Acquisition of Property, Plant, and Equipment"
+ShareBasedCompensation,Stock-Based Compensation
+us-gaap_PaymentsOfDividends,Payment of Dividends
+NetCashProvidedByUsedInInvestingActivities,Net Cash Provided by Investing Activities
+us-gaap_PaymentsToAcquireProductiveAssets,"Acquisition of Property, Plant, and Equipment"
+us-gaap_AmortizationOfFinancingCosts,Depreciation and Amortization

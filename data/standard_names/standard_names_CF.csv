@@ -1,33 +1,36 @@
-"standard_name"
-"Net Income"
-"Depreciation and Amortization"
-"Deferred Taxes"
-"Stock-Based Compensation"
-"Increase in Working Capital"
-"Decrease in Working Capital"
-"Change in Net Working Capital"
-"Increase in Accounts Receivable"
-"Decrease in Accounts Receivable"
-"Change in Net Accounts Receivable"
-"Increase in Inventory"
-"Decrease in Inventory"
-"Change in Net Inventory"
-"Increase in Accounts Payable"
-"Decrease in Accounts Payable"
-"Change in Net Accounts Payable"
-"Income Taxes Payable"
-"Other Working Capital"
-"Cash Flow from Others"
-"Net Cash Provided by Operating Activities"
+standard_name
+Net Income
+Depreciation and Amortization
+Deferred Taxes
+Stock-Based Compensation
+Increase in Working Capital
+Decrease in Working Capital
+Change in Net Working Capital
+Increase in Accounts Receivable
+Decrease in Accounts Receivable
+Change in Net Accounts Receivable
+Increase in Inventory
+Decrease in Inventory
+Change in Net Inventory
+Increase in Accounts Payable
+Decrease in Accounts Payable
+Change in Net Accounts Payable
+Income Taxes Payable
+Other Working Capital
+Cash Flow from Others
+Net Cash Provided by Operating Activities
 "Acquisition of Property, Plant, and Equipment"
 "Disposition of Property, Plant, and Equipment"
-"Purchases of Investments"
-"Sales of Investments"
-"Payment of Debt"
-"Issuance of Debt"
-"Issuance of Stock"
-"Repurchase of Stock"
-"Payment of Dividends"
-"Net Cash Provided by Financing Activities"
-"Effect of Exchange Rate Changes on Cash"
-"Net Change in Cash and Cash Equivalents"
+Purchases of Investments
+Sales of Investments
+Net Cash Provided by Investing Activities
+Payment of Debt
+Issuance of Debt
+Issuance of Stock
+Payment to Repurchase of Stock
+Payment of Dividends
+Proceeds from Payment for Other Financing Activities
+Net Cash Provided by Financing Activities
+Effect of Exchange Rate Changes on Cash
+Net Change in Cash and Cash Equivalents Excluding Exchange Rate Changes on Cash
+Net Change in Cash and Cash Equivalents
