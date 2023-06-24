@@ -280,3 +280,79 @@ get_last_statements_by_symbol <- function(type_of_statement, concept_description
   result <- list(symbols = symbols, last_statements = last_statements)
   return(result)
 }
+
+# Extract financial data
+
+extract_financials_data <- function(mapping_table_path, financials_data) {
+  # Read the mapping table
+  mapping_table <- read.csv(mapping_table_path, stringsAsFactors = FALSE)
+  
+  # Create an empty data frame to store the extracted data
+  extracted_data <- data.frame(symbol = character(),
+                               year = numeric(),
+                               quarter = character(),
+                               filedDate = character(),
+                               stringsAsFactors = FALSE)
+  
+  # Iterate over each symbol, year, and quarter
+  for (i in 1:length(financials_data$report$bs)) {
+    # Extract the financials data for the current symbol, year, and quarter
+    bs_data <- financials_data$report$bs[[i]]
+    ic_data <- financials_data$report$ic[[i]]
+    cf_data <- financials_data$report$cf[[i]]
+    
+    # Extract the symbol, year, quarter, and filedDate
+    symbol <- bs_data$symbol
+    year <- bs_data$year
+    quarter <- bs_data$quarter
+    filedDate <- bs_data$filedDate
+    
+    # Extract the relevant concepts and their corresponding values
+    bs_concepts <- unlist(bs_data$concept)
+    bs_values <- unlist(bs_data$value)
+    
+    ic_concepts <- unlist(ic_data$concept)
+    ic_values <- unlist(ic_data$value)
+    
+    cf_concepts <- unlist(cf_data$concept)
+    cf_values <- unlist(cf_data$value)
+    
+    # Create a data frame for the current symbol, year, and quarter
+    df <- data.frame(symbol = symbol,
+                     year = year,
+                     quarter = quarter,
+                     filedDate = filedDate,
+                     stringsAsFactors = FALSE)
+    
+    # Iterate over each concept in the mapping table
+    for (j in 1:nrow(mapping_table)) {
+      concept <- mapping_table$concepts[j]
+      standard_name <- mapping_table$standard_name[j]
+      
+      # Check if the concept is present in the bs_concepts and extract the corresponding value
+      if (concept %in% bs_concepts) {
+        bs_value <- bs_values[which(bs_concepts == concept)]
+        df[[standard_name]] <- bs_value
+      }
+      
+      # Check if the concept is present in the ic_concepts and extract the corresponding value
+      if (concept %in% ic_concepts) {
+        ic_value <- ic_values[which(ic_concepts == concept)]
+        df[[standard_name]] <- ic_value
+      }
+      
+      # Check if the concept is present in the cf_concepts and extract the corresponding value
+      if (concept %in% cf_concepts) {
+        cf_value <- cf_values[which(cf_concepts == concept)]
+        df[[standard_name]] <- cf_value
+      }
+    }
+    
+    # Append the current symbol's data to the extracted_data data frame
+    extracted_data <- bind_rows(extracted_data, df)
+  }
+  
+  # Return the extracted_data data frame
+  return(extracted_data)
+}
+

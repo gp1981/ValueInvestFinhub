@@ -47,15 +47,18 @@ filteredDF <- filterCompanies(cleanDF, minMarketCapMillionUSD = 50)  # Example: 
 
 # Retrieve financial data for filtered companies
 financialsDF <- retrieveFinancials(filteredDF, API_KEY)
+mapping_table_path <- "data/mappingTable.csv"
+extracted_data <- extract_financials_data(mapping_table_path, financials_data = financialsDF)
+
 
 # Extract concepts from financialsDF
-summary_concepts <- extractConcepts(financialsDF)
+# summary_concepts <- extractConcepts(financialsDF)
 
 # Generate CSV files for standard names
 # generateStandardNamesCSV()
 
 # Create the mapping table
-mappingTable <- createMappingTable()
+# mappingTable <- createMappingTable()
 
 # -------------------- 04 - Data Analysis --------------------
 # Perform analysis on common stocks data frame
