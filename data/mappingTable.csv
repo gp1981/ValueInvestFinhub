@@ -75,14 +75,14 @@ us-gaap_OtherComprehensiveIncomeLossNetOfTax,Net Income
 us-gaap_ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest,Net Income
 us-gaap_IncomeLossFromEquityMethodInvestments,Net Income
 us-gaap_EarningsPerShareBasicAndDiluted,Earnings Per Share (EPS)
-us-gaap_NetIncomeLossAttributableToNoncontrollingInterest,
+us-gaap_NetIncomeLossAttributableToNoncontrollingInterest,Net Income (Loss) Attributable to Non Controlling Interest
 us-gaap_WeightedAverageNumberOfShareOutstandingBasicAndDiluted,Weighted Number of Shares Outstanding
 us-gaap_InvestmentIncomeInterest,Interest Expense
 us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments,Income Before Taxes
 us-gaap_CostsAndExpenses,"Selling, General, and Administrative Expenses"
 us-gaap_ComprehensiveIncomeNetOfTaxAttributableToNoncontrollingInterest,Net Income
 NetIncomeLoss,Net Income
-us-gaap_CommonStockDividendsPerShareDeclared,
+us-gaap_CommonStockDividendsPerShareDeclared,Common Stock Dividends Per Share Declared
 us-gaap_CostOfRevenue,Cost of Goods Sold
 us-gaap_NetIncomeLossAvailableToCommonStockholdersBasic,Net Income
 IncomeTaxExpenseBenefit,"Income Taxes, tax provision"
@@ -91,15 +91,15 @@ OperatingIncomeLoss,Operating Income
 us-gaap_IncomeLossFromContinuingOperations,Operating Income
 us-gaap_CostOfGoodsSold,Cost of Goods Sold
 us-gaap_IncomeLossFromContinuingOperationsPerBasicShare,Earnings Per Share (EPS)
-us-gaap_IncomeLossFromContinuingOperationsPerDilutedShare,
+us-gaap_IncomeLossFromContinuingOperationsPerDilutedShare,Income (Loss) From Continuing Operations Per Diluted Share
 us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansAdjustmentNetOfTax,"Selling, General, and Administrative Expenses"
 InterestExpense,Interest Expense
-us-gaap_SalesRevenueNet,Revenu
+us-gaap_SalesRevenueNet,Revenue
 us-gaap_OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent,Net Income
 us-gaap_InterestIncomeExpenseNet,Interest Expense
 EarningsPerShareBasic,Earnings Per Share (EPS)
 WeightedAverageNumberOfDilutedSharesOutstanding,Weighted Number of Shares Outstanding
-us-gaap_ShareBasedCompensation,
+us-gaap_ShareBasedCompensation,Stock-Based Compensation
 us-gaap_NetCashProvidedByUsedInOperatingActivities,Net Cash Provided by Operating Activities
 us-gaap_NetCashProvidedByUsedInFinancingActivities,Net Cash Provided by Financing Activities
 us-gaap_NetCashProvidedByUsedInInvestingActivities,Net Cash Provided by Investing Activities
@@ -131,10 +131,10 @@ us-gaap_EffectOfExchangeRateOnCashAndCashEquivalents,Effect of Exchange Rate Cha
 us-gaap_DepreciationAndAmortization,Depreciation and Amortization
 us-gaap_ProceedsFromIssuanceOfCommonStock,Issuance of Stock
 us-gaap_NetCashProvidedByUsedInFinancingActivitiesContinuingOperations,Net Cash Provided by Financing Activities
-us-gaap_PaymentsRelatedToTaxWithholdingForShareBasedCompensation,
+us-gaap_PaymentsRelatedToTaxWithholdingForShareBasedCompensation,Change in Net Working Capital
 us-gaap_ProceedsFromIssuanceOfLongTermDebt,Issuance of Debt
-us-gaap_ProvisionForDoubtfulAccounts,
-us-gaap_IncomeTaxesPaidNet,
+us-gaap_ProvisionForDoubtfulAccounts,Provision for Doubtful Amount
+us-gaap_IncomeTaxesPaidNet,"Income Taxes, tax provision"
 us-gaap_IncreaseDecreaseInReceivables,Change in Net Accounts Receivable
 us-gaap_ProceedsFromPaymentsForOtherFinancingActivities,Proceeds from Payment for Other Financing Activities
 us-gaap_PaymentsOfDividendsCommonStock,Payment of Dividends

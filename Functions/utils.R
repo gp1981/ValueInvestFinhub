@@ -2,6 +2,13 @@
 # Author: gp1981 with the contribution of ChatGPT4.0
 # Purpose: Utility functions for data manipulation
 
+# Load Libraries
+library(dplyr)
+library(stringdist)
+library(stringr)
+library(progress)
+
+
 # Set the path to the data files
 # Set the path to the concepts directory
 conceptsDir <- "data/concepts/"
@@ -185,11 +192,6 @@ generateStandardNamesCSV <- function() {
   write.csv(cfNamesDF, file = "data/standard_names/standard_names_CF.csv", row.names = FALSE)
 }
 
-
-library(dplyr)
-library(stringdist)
-library(stringr)
-
 # Function to create a mapping table of concepts and standard names of BS, IC, CF
 createMappingTable <- function() {
   # Load the standard names CSV files
@@ -264,16 +266,17 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
                                filedDate = character(),
                                stringsAsFactors = FALSE)
   
-  # Get all unique standard names from the mapping table
-  standard_names <- unique(mapping_table$standard_name)
+  # Define the number of iterations for the outer loop
+  total_iterations_outer <- length(financials_data$report$bs)
   
-  # Add columns for each standard name to extracted_data
-  for (name in standard_names) {
-    extracted_data[[name]] <- NA
-  }
+  # Initialize the outer progress bar
+  pb_outer <- progress_bar$new(format = "[:bar] :percent Elapsed: :elapsed ETA: :eta",
+                               total = total_iterations_outer)
+  
   
   # Iterate over each symbol, year, and quarter
   for (i in 1:length(financials_data$report$bs)) {
+    
     # Extract the financials data for the current symbol, year, and quarter
     bs_data <- financials_data$report$bs[[i]]
     ic_data <- financials_data$report$ic[[i]]
@@ -281,9 +284,19 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
     
     # Extract the symbol, year, quarter, and filedDate from financialsDF using index i
     symbol <- financials_data$symbol[i]
-    year <- financials_data$year[i]
-    quarter <- financials_data$quarter[i]
+    year <- as.integer(financials_data$year[i])
+    quarter <- as.integer(financials_data$quarter[i])
     filedDate <- financials_data$filedDate[i]
+    
+    # Extract the relevant concepts and their corresponding values from bs_data, ic_data, cf_data
+    bs_concepts <- bs_data$concept
+    bs_values <- as.numeric(bs_data$value)
+    
+    ic_concepts <- ic_data$concept
+    ic_values <- as.numeric(ic_data$value)
+    
+    cf_concepts <- cf_data$concept
+    cf_values <- as.numeric(cf_data$value)
     
     # Create a data frame for the current symbol, year, and quarter
     df <- data.frame(symbol = symbol,
@@ -292,43 +305,56 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
                      filedDate = filedDate,
                      stringsAsFactors = FALSE)
     
-    # Add missing columns to df with NA values
-    missing_columns <- setdiff(names(extracted_data), names(df))
-    for (col in missing_columns) {
-      df[[col]] <- NA
-    }
-    
     # Iterate over each concept in the mapping table
     for (j in 1:nrow(mapping_table)) {
+      # Update the inner progress bar
+      
       concept <- mapping_table$concept[j]
       standard_name <- mapping_table$standard_name[j]
+      found_value <- FALSE
       
       # Check if the concept is present in the bs_concepts and extract the corresponding value
-      if (concept %in% bs_data$concept) {
-        bs_value <- bs_data$value[match(concept, bs_data$concept)]
-        df[[standard_name]] <- bs_value
+      if (concept %in% bs_concepts) {
+        bs_value <- bs_values[which(bs_concepts == concept)]
+        df <- df %>% mutate(!!standard_name := bs_value)
+        # extracted_data_df <- bind_rows(extracted_data,df)
+        found_value <- TRUE
       }
       
       # Check if the concept is present in the ic_concepts and extract the corresponding value
-      if (concept %in% ic_data$concept) {
-        ic_value <- ic_data$value[match(concept, ic_data$concept)]
-        df[[standard_name]] <- ic_value
+      if (concept %in% ic_concepts) {
+        ic_value <- ic_values[which(ic_concepts == concept)]
+        df <- df %>% mutate(!!standard_name := ic_value)
+        # extracted_data_df <- bind_rows(extracted_data,df)
+        found_value <- TRUE
       }
       
       # Check if the concept is present in the cf_concepts and extract the corresponding value
-      if (concept %in% cf_data$concept) {
-        cf_value <- cf_data$value[match(concept, cf_data$concept)]
-        df[[standard_name]] <- cf_value
+      if (concept %in% cf_concepts) {
+        cf_value <- cf_values[which(cf_concepts == concept)]
+        df <- df %>% mutate(!!standard_name := cf_value)
+        
+        found_value <- TRUE
       }
+      
+      if (!found_value){
+        next
+      }
+      
+      extracted_data_df <- bind_rows(extracted_data,df)
+      next 
     }
     
-    # Append the current symbol's data to the extracted_data data frame
-    extracted_data <- rbind(extracted_data, df)
+    # Update the outer progress bar
+    pb_outer$tick()
+    
+   # Combined the data extracted
+    extracted_data <- bind_rows(extracted_data, extracted_data_df)
+    
+    # Remove the duplicated rows
+    # extracted_data <- extracted_data[!duplicated(extracted_data)]
   }
-  
-  # Reset row names
-  rownames(extracted_data) <- NULL
-  
+   
+  # Return the extracted_data data frame
   return(extracted_data)
 }
-
