@@ -7,7 +7,9 @@ library(dplyr)
 library(stringdist)
 library(stringr)
 library(progress)
-
+library(janitor)
+library(tidyr)
+library(zoo)
 
 # Set the path to the data files
 # Set the path to the concepts directory
@@ -256,105 +258,133 @@ createMappingTable <- function() {
 
 # Extract the list of symbols and last financial statement providing type of statement, concept, year and quarter
 extract_financials_data <- function(mapping_table_path, financials_data) {
-  # Read the mapping table
-  mapping_table <- read.csv(mapping_table_path, stringsAsFactors = FALSE)
   
   # Create an empty data frame to store the extracted data
-  extracted_data <- data.frame(symbol = character(),
+  extracted_data <- data.frame(label = character(),
+                               unit = character(),
+                               value = integer(),
+                               symbol = character(),
                                year = integer(),
                                quarter = integer(),
                                filedDate = character(),
                                stringsAsFactors = FALSE)
   
-  # Define the number of iterations for the outer loop
-  total_iterations_outer <- length(financials_data$report$bs)
+  # # Define the number of iterations for the outer loop
+  total_iterations <- length(financials_data$report$bs)
+  # 
+  # # Initialize the outer progress bar
+  pb <- progress_bar$new(format = "[:bar] :percent Elapsed: :elapsed ETA: :eta",
+                         total = total_iterations)
   
-  # Initialize the outer progress bar
-  pb_outer <- progress_bar$new(format = "[:bar] :percent Elapsed: :elapsed ETA: :eta",
-                               total = total_iterations_outer)
   
+  # Initialize empty data frames for extracted_data, bs_data, ic_data, and cf_data
+  extracted_data <- data.frame(label = character(),
+                               unit = character(),
+                               value = double(),
+                               concept = character(),
+                               symbol = character(),
+                               year = integer(),
+                               quarter = integer(),
+                               filedDate = character(),
+                               stringsAsFactors = FALSE)
+  bs_data <- data.frame(label = character(),
+                        unit = character(),
+                        value = double(),
+                        concept = character(),
+                        symbol = character(),
+                        year = integer(),
+                        quarter = integer(),
+                        filedDate = character(),
+                        stringsAsFactors = FALSE)
+  ic_data <- data.frame(label = character(),
+                        unit = character(),
+                        value = double(),
+                        concept = character(),
+                        symbol = character(),
+                        year = integer(),
+                        quarter = integer(),
+                        filedDate = character(),
+                        stringsAsFactors = FALSE)
+  cf_data <- data.frame(label = character(),
+                        unit = character(),
+                        value = double(),
+                        concept = character(),
+                        symbol = character(),
+                        year = integer(),
+                        quarter = integer(),
+                        filedDate = character(),
+                        stringsAsFactors = FALSE)
   
   # Iterate over each symbol, year, and quarter
   for (i in 1:length(financials_data$report$bs)) {
+    pb$tick()
     
     # Extract the financials data for the current symbol, year, and quarter
-    bs_data <- financials_data$report$bs[[i]]
-    ic_data <- financials_data$report$ic[[i]]
-    cf_data <- financials_data$report$cf[[i]]
-    
-    # Extract the symbol, year, quarter, and filedDate from financialsDF using index i
-    symbol <- financials_data$symbol[i]
-    year <- as.integer(financials_data$year[i])
-    quarter <- as.integer(financials_data$quarter[i])
-    filedDate <- financials_data$filedDate[i]
-    
-    # Extract the relevant concepts and their corresponding values from bs_data, ic_data, cf_data
-    bs_concepts <- bs_data$concept
-    bs_values <- as.numeric(bs_data$value)
-    
-    ic_concepts <- ic_data$concept
-    ic_values <- as.numeric(ic_data$value)
-    
-    cf_concepts <- cf_data$concept
-    cf_values <- as.numeric(cf_data$value)
-    
-    # Create a data frame for the current symbol, year, and quarter
-    df <- data.frame(symbol = symbol,
-                     year = year,
-                     quarter = quarter,
-                     filedDate = filedDate,
-                     stringsAsFactors = FALSE)
-    
-    # Iterate over each concept in the mapping table
-    for (j in 1:nrow(mapping_table)) {
-      # Update the inner progress bar
+    if (length(financials_data$report$bs[[i]]) > 0) {
+      bs_data <- financials_data$report$bs[[i]] %>% 
+        mutate(across(c(label, unit, concept), as.character), across(value, as.double)) %>%
+        select(label, unit, value, concept) %>% clean_names() %>%
+        mutate(symbol = financials_data$symbol[i],
+               year = as.integer(financials_data$year[i]),
+               quarter = as.integer(financials_data$quarter[i]),
+               filedDate = financials_data$filedDate[i])
       
-      concept <- mapping_table$concept[j]
-      standard_name <- mapping_table$standard_name[j]
-      found_value <- FALSE
-      
-      # Check if the concept is present in the bs_concepts and extract the corresponding value
-      if (concept %in% bs_concepts) {
-        bs_value <- bs_values[which(bs_concepts == concept)]
-        df <- df %>% mutate(!!standard_name := bs_value)
-        # extracted_data_df <- bind_rows(extracted_data,df)
-        found_value <- TRUE
-      }
-      
-      # Check if the concept is present in the ic_concepts and extract the corresponding value
-      if (concept %in% ic_concepts) {
-        ic_value <- ic_values[which(ic_concepts == concept)]
-        df <- df %>% mutate(!!standard_name := ic_value)
-        # extracted_data_df <- bind_rows(extracted_data,df)
-        found_value <- TRUE
-      }
-      
-      # Check if the concept is present in the cf_concepts and extract the corresponding value
-      if (concept %in% cf_concepts) {
-        cf_value <- cf_values[which(cf_concepts == concept)]
-        df <- df %>% mutate(!!standard_name := cf_value)
-        
-        found_value <- TRUE
-      }
-      
-      if (!found_value){
-        next
-      }
-      
-      extracted_data_df <- bind_rows(extracted_data,df)
-      next 
+      extracted_data <- bind_rows(extracted_data, bs_data)
     }
     
-    # Update the outer progress bar
-    pb_outer$tick()
+    if (length(financials_data$report$ic[[i]]) > 0) {
+      ic_data <- financials_data$report$ic[[i]] %>% 
+        mutate(across(c(label, unit, concept), as.character), across(value, as.double)) %>%
+        select(label, unit, value, concept) %>% clean_names() %>%
+        mutate(symbol = financials_data$symbol[i],
+               year = as.integer(financials_data$year[i]),
+               quarter = as.integer(financials_data$quarter[i]),
+               filedDate = financials_data$filedDate[i])
+      
+      extracted_data <- bind_rows(extracted_data, ic_data)
+    }
     
-   # Combined the data extracted
-    extracted_data <- bind_rows(extracted_data, extracted_data_df)
-    
-    # Remove the duplicated rows
-    # extracted_data <- extracted_data[!duplicated(extracted_data)]
+    if (length(financials_data$report$cf[[i]]) > 0) {
+      cf_data <- financials_data$report$cf[[i]] %>% 
+        mutate(across(c(label, unit, concept), as.character), across(value, as.double)) %>%
+        select(label, unit, value, concept) %>% clean_names() %>%
+        mutate(symbol = financials_data$symbol[i],
+               year = as.integer(financials_data$year[i]),
+               quarter = as.integer(financials_data$quarter[i]),
+               filedDate = financials_data$filedDate[i])
+      
+      extracted_data <- bind_rows(extracted_data, cf_data)
+    }
   }
-   
+  
+  # Count empty labels before fill
+  empty_labels_before <- sum(extracted_data$label == "")
+  
+  
+  # Sort the data by the concept column
+  extracted_data <- extracted_data %>%
+    arrange(concept)
+  
+  # Replace empty labels with corresponding non-empty labels
+  extracted_data1 <- extracted_data %>%
+    group_by(concept) %>%
+    mutate(label = ifelse(label == "", na.locf(label), label)) %>%
+    ungroup()
+  
+  # Count empty labels after fill
+  empty_labels_after <- sum(extracted_data$label == "")
+  
+  # Print the counts
+  cat("Empty labels before fill:", empty_labels_before, "\n")
+  cat("Empty labels after fill:", empty_labels_after, "\n")
+  
+  # Remove the duplicated rows based on label,unit,value,and concept != NA
+  extracted_data <- extracted_data %>% 
+    filter(!is.na(concept)) %>% 
+    distinct(label,unit,value,.keep_all = TRUE)
+  
+  
   # Return the extracted_data data frame
   return(extracted_data)
 }
+

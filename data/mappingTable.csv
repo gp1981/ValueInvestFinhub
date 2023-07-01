@@ -5,10 +5,12 @@ us-gaap_RetainedEarningsAccumulatedDeficit,Retained Earnings and Accumulated Def
 us-gaap_StockholdersEquity,Shareholders' Equity
 us-gaap_LiabilitiesCurrent,Total Current Liabilities
 us-gaap_AssetsCurrent,Total Current Assets
-us-gaap_CashAndCashEquivalentsAtCarryingValue,Cash and Cash Equivalents and Short-term Investments
+us-gaap_CashAndCashEquivalentsAtCarryingValue,Cash and Cash Equivalents
+us-gaap_AvailableForSaleSecuritiesDebtSecuritiesCurrent,Short-Term investments
 us-gaap_PropertyPlantAndEquipmentNet,"Net Property, Plant, and Equipment, after depreciation and amortization"
-us-gaap_CommonStockValue,Cash and Cash Equivalents and Short-term Investments
+us-gaap_CommonStockValue,Short-Term investments
 us-gaap_Liabilities,Total Liabilities
+us-gaap_LiabilitiesNoncurrent,Total Long-Term Liabilities
 us-gaap_OtherAssetsNoncurrent,Other Long-term Assets
 us-gaap_Goodwill,Goodwill
 us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax,Retained Earnings and Accumulated Deficit
@@ -48,6 +50,7 @@ us-gaap_AccountsPayableAndAccruedLiabilitiesCurrent,Accounts Payable
 PropertyPlantAndEquipmentNet,"Net Property, Plant, and Equipment, after depreciation and amortization"
 us-gaap_LongTermDebtAndCapitalLeaseObligationsCurrent,Long-term Debt
 CashAndCashEquivalentsAtCarryingValue,Cash and Cash Equivalents and Short-term Investments
+AvailableForSaleSecuritiesDebtSecuritiesCurrent,Short-Term investments
 us-gaap_DeferredIncomeTaxAssetsNet,"Income Taxes, tax provision"
 us-gaap_NetIncomeLoss,Net Income
 us-gaap_OperatingIncomeLoss,Operating Income
