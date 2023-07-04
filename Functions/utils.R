@@ -42,7 +42,8 @@ cleanCommonStocksDF <- function(commonStocksDF) {
 }
 
 # Function to filter companies based on exclusion criteria and minimum market capitalization
-filterCompanies <- function(df, excludedIndustries = c("Utilities", "Banking", "Insurance", "Financial Services"), allowedCountries = c("US", "CA"), minMarketCapMillionUSD = 0) {
+filterCompanies <- function(df, excludedIndustries = c("Utilities", "Banking", "Insurance", "Financial Services"), 
+                            allowedCountries = c("US", "CA"), minMarketCapMillionUSD = 0) {
   filteredDF <- df %>%
     filter(!finnhubIndustry %in% excludedIndustries) %>%
     filter(country %in% allowedCountries) %>%
@@ -194,68 +195,6 @@ generateStandardNamesCSV <- function() {
   write.csv(cfNamesDF, file = "data/standard_names/standard_names_CF.csv", row.names = FALSE)
 }
 
-# Function to create a mapping table of concepts and standard names of BS, IC, CF
-createMappingTable <- function() {
-  # Load the standard names CSV files
-  bsNamesDF <- read.csv("data/standard_names/standard_names_BS.csv", stringsAsFactors = FALSE)
-  icNamesDF <- read.csv("data/standard_names/standard_names_IC.csv", stringsAsFactors = FALSE)
-  cfNamesDF <- read.csv("data/standard_names/standard_names_CF.csv", stringsAsFactors = FALSE)
-  
-  # Extract the standard names from the data frames
-  standard_names_BS <- bsNamesDF$standard_name
-  standard_names_IC <- icNamesDF$standard_name
-  standard_names_CF <- cfNamesDF$standard_name
-  
-  # Function to split words and remove prefixes
-  split_words <- function(input_string, split_chars) {
-    # Create a pattern to match any of the split_chars
-    split_pattern <- paste0("[", paste0(split_chars, collapse = "|"), "]")
-    
-    # Replace split_chars with a space
-    cleaned_string <- gsub(split_pattern, " ", input_string)
-    
-    # Split the cleaned_string into words
-    words <- str_split(cleaned_string, "(?<=.)(?=[A-Z][a-z])", simplify = TRUE)
-    
-    # Return the words
-    return(words)
-  }
-  
-  # Function to map concepts to standard names
-  mapConcepts <- function(concepts, standard_names) {
-    mapping <- data.frame(concept = character(0), standard_name = character(0), stringsAsFactors = FALSE)
-    
-    for (concept in concepts) {
-      # Remove prefixes from concept
-      concept_cleaned <- gsub("^[^_: ]*[:_ ]", "", concept)
-      
-      # Split concept into words
-      concept_words <- str_split(concept_cleaned, "\\W+")[[1]]
-      
-      # Calculate string distances between concept words and standard names
-      distances <- stringdist::stringdistmatrix(concept_words, standard_names)
-      
-      # Find the minimum distance and its corresponding standard name
-      min_distances <- apply(distances, 1, min)
-      match <- standard_names[apply(distances, 1, which.min)]
-      
-      # Add the mapping to the data frame
-      mapping <- rbind(mapping, data.frame(concept = concept, standard_name = match, stringsAsFactors = FALSE))
-    }
-    
-    return(mapping)
-  }
-  
-  # Map concepts to standard names for balance sheet, income statement, and cash flow statement
-  mappingTable <- list(
-    bs = mapConcepts(summary_concepts$summary_bsConcepts, standard_names_BS),
-    ic = mapConcepts(summary_concepts$summary_icConcepts, standard_names_IC),
-    cf = mapConcepts(summary_concepts$summary_cfConcepts, standard_names_CF)
-  )
-  
-  return(mappingTable)
-}
-
 # Extract the list of symbols and last financial statement providing type of statement, concept, year and quarter
 extract_financials_data <- function(mapping_table_path, financials_data) {
   
@@ -269,7 +208,11 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
                                filedDate = character(),
                                stringsAsFactors = FALSE)
   
-  # # Define the number of iterations for the outer loop
+  # Load the mapping table to get standardised labels
+  mappingTable <- read.csv("data/mappingTable.csv")  # Adjust the file path if needed
+  
+  
+  # # Define the number of iterations for the loop
   total_iterations <- length(financials_data$report$bs)
   # 
   # # Initialize the outer progress bar
@@ -357,34 +300,21 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
     }
   }
   
-  # Count empty labels before fill
-  empty_labels_before <- sum(extracted_data$label == "")
   
-  
-  # Sort the data by the concept column
-  extracted_data <- extracted_data %>%
-    arrange(concept)
-  
-  # Replace empty labels with corresponding non-empty labels
-  extracted_data1 <- extracted_data %>%
-    group_by(concept) %>%
-    mutate(label = ifelse(label == "", na.locf(label), label)) %>%
-    ungroup()
-  
-  # Count empty labels after fill
-  empty_labels_after <- sum(extracted_data$label == "")
-  
-  # Print the counts
-  cat("Empty labels before fill:", empty_labels_before, "\n")
-  cat("Empty labels after fill:", empty_labels_after, "\n")
+  # Perform the join with mapping_table to fill in the standard_name
+  extracted_data_std <- extracted_data %>%
+    left_join(mappingTable, by = "concept") %>%
+    mutate(standard_name = ifelse(is.na(standard_name), label, standard_name))
   
   # Remove the duplicated rows based on label,unit,value,and concept != NA
-  extracted_data <- extracted_data %>% 
-    filter(!is.na(concept)) %>% 
-    distinct(label,unit,value,.keep_all = TRUE)
+  extracted_data_std <- extracted_data_std %>%  
+    distinct(standard_name,unit,value,.keep_all = TRUE) %>% 
+    select(standard_name,unit,value, everything())
   
+  # Clean data set from rows with (all) NA
+  cleaned_data <- na.omit(extracted_data)
   
   # Return the extracted_data data frame
-  return(extracted_data)
+  return(extracted_data_std)
 }
 

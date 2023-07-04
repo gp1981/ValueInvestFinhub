@@ -51,15 +51,6 @@ mapping_table_path <- "data/mappingTable.csv"
 extracted_data <- extract_financials_data(mapping_table_path, financials_data = financialsDF)
 
 
-# Extract concepts from financialsDF
-# summary_concepts <- extractConcepts(financialsDF)
-
-# Generate CSV files for standard names
-# generateStandardNamesCSV()
-
-# Create the mapping table
-# mappingTable <- createMappingTable()
-
 # -------------------- 04 - Data Analysis --------------------
 # Perform analysis on common stocks data frame
 # Call functions from analysis.R or add your analysis code here
