@@ -318,3 +318,23 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
   return(extracted_data_std)
 }
 
+# Get unique values from extracted_data DataFrame
+# Returns: all_companies - a vector of unique company symbols
+#          all_years_list - a vector of unique years
+#          all_quarters_list - a vector of unique quarters
+get_unique_values <- function(extracted_data) {
+  # Get unique companies
+  all_companies <- unique(extracted_data$symbol)
+  
+  # Get unique years
+  all_years_list <- unique(extracted_data$year)
+  
+  # Get unique quarters
+  all_quarters_list <- unique(extracted_data$quarter)
+  
+  # Return the lists
+  return(list(all_companies = all_companies,
+              all_years_list = all_years_list,
+              all_quarters_list = all_quarters_list))
+}
+
