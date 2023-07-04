@@ -1,6 +1,6 @@
 # main.R
 
-# Author: gp1981
+# Author: gp1981 with the contribution of ChatGPT4.0
 
 # Purpose: This script replicates the ranking of companies as per "The Little Book that Still Beats the Market" by J. Greenblatt. It uses data from the Finnhub API.
 
@@ -44,6 +44,11 @@ cleanDF <- cleanCommonStocksDF(commonStocksDF)
 
 # Filter companies based on exclusion criteria and minimum market capitalization
 filteredDF <- filterCompanies(cleanDF, minMarketCapMillionUSD = 50)  # Example: Minimum market cap of 50 million USD
+
+# Retrieve financial data for filtered companies
+financialsDF <- retrieveFinancials(filteredDF, API_KEY)
+mapping_table_path <- "data/mappingTable.csv"
+extracted_data <- extract_financials_data(mapping_table_path, financials_data = financialsDF)
 
 
 # -------------------- 04 - Data Analysis --------------------

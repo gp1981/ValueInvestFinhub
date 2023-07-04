@@ -1,0 +1,154 @@
+concept,standard_name
+us-gaap_LiabilitiesAndStockholdersEquity,Total Liabilities and Stockholders' Equity
+us-gaap_Assets,Total Assets
+us-gaap_RetainedEarningsAccumulatedDeficit,Retained Earnings and Accumulated Deficit
+us-gaap_StockholdersEquity,Shareholders' Equity
+us-gaap_LiabilitiesCurrent,Total Current Liabilities
+us-gaap_AssetsCurrent,Total Current Assets
+us-gaap_CashAndCashEquivalentsAtCarryingValue,Cash and Cash Equivalents
+us-gaap_AvailableForSaleSecuritiesDebtSecuritiesCurrent,Short-Term investments
+us-gaap_PropertyPlantAndEquipmentNet,"Net Property, Plant, and Equipment, after depreciation and amortization"
+us-gaap_CommonStockValue,Short-Term investments
+us-gaap_Liabilities,Total Liabilities
+us-gaap_LiabilitiesNoncurrent,Total Long-Term Liabilities
+us-gaap_OtherAssetsNoncurrent,Other Long-term Assets
+us-gaap_Goodwill,Goodwill
+us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax,Retained Earnings and Accumulated Deficit
+us-gaap_AccountsPayableCurrent,Accounts Payable
+us-gaap_OtherLiabilitiesNoncurrent,Other Long-term Liabilities
+us-gaap_PrepaidExpenseAndOtherAssetsCurrent,Prepaid Expenses
+us-gaap_AccountsReceivableNetCurrent,Accounts Receivable
+us-gaap_AdditionalPaidInCapital,Additional Paid-In Capital
+us-gaap_IntangibleAssetsNetExcludingGoodwill,Intangible Assets Excluding Goodwill
+us-gaap_InventoryNet,Inventory
+us-gaap_AccruedLiabilitiesCurrent,Total Current Liabilities
+us-gaap_TreasuryStockValue,Treasury Stock
+us-gaap_AdditionalPaidInCapitalCommonStock,Additional Paid-In Capital
+us-gaap_LongTermDebtNoncurrent,Long-term Debt
+us-gaap_OperatingLeaseRightOfUseAsset,Current Capital Lease and Long-term Obligations
+us-gaap_StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest,Shareholders' Equity
+us-gaap_PreferredStockValue,Preferred Stock
+us-gaap_OperatingLeaseLiabilityNoncurrent,Other Long-term Liabilities
+us-gaap_LongTermDebtCurrent,Current Capital Lease and Long-term Obligations
+us-gaap_MinorityInterest,Minority Interest
+us-gaap_EmployeeRelatedLiabilitiesCurrent,Other Current Liabilities
+us-gaap_OperatingLeaseLiabilityCurrent,Other Current Liabilities
+us-gaap_OtherAssetsCurrent,Other Current Assets
+us-gaap_OtherLiabilitiesCurrent,Other Current Liabilities
+us-gaap_DeferredIncomeTaxLiabilitiesNet,Taxes Payable
+us-gaap_DeferredTaxLiabilitiesNoncurrent,Other Long-term Liabilities
+us-gaap_PrepaidExpenseCurrent,Prepaid Expenses
+LiabilitiesAndStockholdersEquity,Total Liabilities and Stockholders' Equity
+Assets,Total Assets
+us-gaap_LongTermDebtAndCapitalLeaseObligations,Long-term Debt
+RetainedEarningsAccumulatedDeficit,Retained Earnings and Accumulated Deficit
+StockholdersEquity,Shareholders' Equity
+us-gaap_ContractWithCustomerLiabilityCurrent,Other Current Liabilities
+LiabilitiesCurrent,Other Current Assets
+AssetsCurrent,Total Current Assets
+us-gaap_AccountsPayableAndAccruedLiabilitiesCurrent,Accounts Payable
+PropertyPlantAndEquipmentNet,"Net Property, Plant, and Equipment, after depreciation and amortization"
+us-gaap_LongTermDebtAndCapitalLeaseObligationsCurrent,Long-term Debt
+CashAndCashEquivalentsAtCarryingValue,Cash and Cash Equivalents and Short-term Investments
+AvailableForSaleSecuritiesDebtSecuritiesCurrent,Short-Term investments
+us-gaap_DeferredIncomeTaxAssetsNet,"Income Taxes, tax provision"
+us-gaap_NetIncomeLoss,Net Income
+us-gaap_OperatingIncomeLoss,Operating Income
+us-gaap_IncomeTaxExpenseBenefit,"Income Taxes, tax provision"
+us-gaap_EarningsPerShareBasic,Earnings Per Share (EPS)
+us-gaap_EarningsPerShareDiluted,Diluted Earnings Per Share
+us-gaap_WeightedAverageNumberOfSharesOutstandingBasic,Weighted Number of Shares Outstanding
+us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding,Weighted Number of Shares Outstanding
+us-gaap_ComprehensiveIncomeNetOfTax,Net Income
+us-gaap_OtherNonoperatingIncomeExpense,"Selling, General, and Administrative Expenses"
+us-gaap_InterestExpense,Interest Expense
+us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest,Income Before Taxes
+us-gaap_GeneralAndAdministrativeExpense,"Selling, General, and Administrative Expenses"
+us-gaap_OperatingExpenses,"Selling, General, and Administrative Expenses"
+us-gaap_GrossProfit,Gross Profit
+us-gaap_SellingGeneralAndAdministrativeExpense,"Selling, General, and Administrative Expenses"
+us-gaap_ResearchAndDevelopmentExpense,Research and Development Expenses
+us-gaap_NonoperatingIncomeExpense,"Selling, General, and Administrative Expenses"
+us-gaap_Revenues,Revenue
+us-gaap_OtherComprehensiveIncomeLossForeignCurrencyTransactionAndTranslationAdjustmentNetOfTax,Net Income
+us-gaap_CostOfGoodsAndServicesSold,Cost of Goods Sold
+us-gaap_ProfitLoss,Net Income
+us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax,Revenue
+us-gaap_OtherComprehensiveIncomeLossNetOfTax,Net Income
+us-gaap_ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest,Net Income
+us-gaap_IncomeLossFromEquityMethodInvestments,Net Income
+us-gaap_EarningsPerShareBasicAndDiluted,Earnings Per Share (EPS)
+us-gaap_NetIncomeLossAttributableToNoncontrollingInterest,Net Income (Loss) Attributable to Non Controlling Interest
+us-gaap_WeightedAverageNumberOfShareOutstandingBasicAndDiluted,Weighted Number of Shares Outstanding
+us-gaap_InvestmentIncomeInterest,Interest Expense
+us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments,Income Before Taxes
+us-gaap_CostsAndExpenses,"Selling, General, and Administrative Expenses"
+us-gaap_ComprehensiveIncomeNetOfTaxAttributableToNoncontrollingInterest,Net Income
+NetIncomeLoss,Net Income
+us-gaap_CommonStockDividendsPerShareDeclared,Common Stock Dividends Per Share Declared
+us-gaap_CostOfRevenue,Cost of Goods Sold
+us-gaap_NetIncomeLossAvailableToCommonStockholdersBasic,Net Income
+IncomeTaxExpenseBenefit,"Income Taxes, tax provision"
+us-gaap_SellingAndMarketingExpense,"Selling, General, and Administrative Expenses"
+OperatingIncomeLoss,Operating Income
+us-gaap_IncomeLossFromContinuingOperations,Operating Income
+us-gaap_CostOfGoodsSold,Cost of Goods Sold
+us-gaap_IncomeLossFromContinuingOperationsPerBasicShare,Earnings Per Share (EPS)
+us-gaap_IncomeLossFromContinuingOperationsPerDilutedShare,Income (Loss) From Continuing Operations Per Diluted Share
+us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansAdjustmentNetOfTax,"Selling, General, and Administrative Expenses"
+InterestExpense,Interest Expense
+us-gaap_SalesRevenueNet,Revenue
+us-gaap_OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent,Net Income
+us-gaap_InterestIncomeExpenseNet,Interest Expense
+EarningsPerShareBasic,Earnings Per Share (EPS)
+WeightedAverageNumberOfDilutedSharesOutstanding,Weighted Number of Shares Outstanding
+us-gaap_ShareBasedCompensation,Stock-Based Compensation
+us-gaap_NetCashProvidedByUsedInOperatingActivities,Net Cash Provided by Operating Activities
+us-gaap_NetCashProvidedByUsedInFinancingActivities,Net Cash Provided by Financing Activities
+us-gaap_NetCashProvidedByUsedInInvestingActivities,Net Cash Provided by Investing Activities
+us-gaap_PaymentsToAcquirePropertyPlantAndEquipment,"Acquisition of Property, Plant, and Equipment"
+us-gaap_NetIncomeLoss,Net Income
+us-gaap_IncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets,Change in Net Working Capital
+us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease,Net Change in Cash and Cash Equivalents
+us-gaap_DepreciationDepletionAndAmortization,Depreciation and Amortization
+us-gaap_IncreaseDecreaseInAccountsReceivable,Change in Net Accounts Receivable
+us-gaap_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect,Net Change in Cash and Cash Equivalents Excluding Exchange Rate Changes on Cash
+us-gaap_IncreaseDecreaseInInventories,Change in Net Inventory
+us-gaap_IncreaseDecreaseInAccountsPayable,Change in Net Accounts Payable
+us-gaap_DeferredIncomeTaxExpenseBenefit,Decrease in Working Capital
+us-gaap_RepaymentsOfLongTermDebt,Payment of Debt
+us-gaap_PaymentsForRepurchaseOfCommonStock,Payment to Repurchase of Stock
+us-gaap_ProfitLoss,Net Income
+us-gaap_ProceedsFromStockOptionsExercised,Stock-Based Compensation
+us-gaap_IncreaseDecreaseInAccountsPayableAndAccruedLiabilities,Change in Net Accounts Payable
+us-gaap_OtherNoncashIncomeExpense,Change in Net Working Capital
+us-gaap_NetCashProvidedByUsedInOperatingActivitiesContinuingOperations,Net Cash Provided by Operating Activities
+us-gaap_InterestPaidNet,Payment of Debt
+us-gaap_IncreaseDecreaseInOtherOperatingAssets,Change in Net Working Capital
+us-gaap_ProceedsFromSaleOfPropertyPlantAndEquipment,"Disposition of Property, Plant, and Equipment"
+us-gaap_IncreaseDecreaseInAccruedLiabilities,Change in Net Working Capital
+us-gaap_PaymentsForProceedsFromOtherInvestingActivities,Sales of Investments
+us-gaap_NetCashProvidedByUsedInInvestingActivitiesContinuingOperations,Net Cash Provided by Investing Activities
+us-gaap_PaymentsToAcquireBusinessesNetOfCashAcquired,Purchase of investment
+us-gaap_EffectOfExchangeRateOnCashAndCashEquivalents,Effect of Exchange Rate Changes on Cash
+us-gaap_DepreciationAndAmortization,Depreciation and Amortization
+us-gaap_ProceedsFromIssuanceOfCommonStock,Issuance of Stock
+us-gaap_NetCashProvidedByUsedInFinancingActivitiesContinuingOperations,Net Cash Provided by Financing Activities
+us-gaap_PaymentsRelatedToTaxWithholdingForShareBasedCompensation,Change in Net Working Capital
+us-gaap_ProceedsFromIssuanceOfLongTermDebt,Issuance of Debt
+us-gaap_ProvisionForDoubtfulAccounts,Provision for Doubtful Amount
+us-gaap_IncomeTaxesPaidNet,"Income Taxes, tax provision"
+us-gaap_IncreaseDecreaseInReceivables,Change in Net Accounts Receivable
+us-gaap_ProceedsFromPaymentsForOtherFinancingActivities,Proceeds from Payment for Other Financing Activities
+us-gaap_PaymentsOfDividendsCommonStock,Payment of Dividends
+us-gaap_EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents,Effect of Exchange Rate Changes on Cash
+us-gaap_IncreaseDecreaseInContractWithCustomerLiability,Change in Net Accounts Payable
+us-gaap_IncomeLossFromEquityMethodInvestments,Stock-Based Compensation
+NetCashProvidedByUsedInOperatingActivities,Net Cash Provided by Operating Activities
+NetCashProvidedByUsedInFinancingActivities,Net Cash Provided by Financing Activities
+us-gaap_CapitalExpendituresIncurredButNotYetPaid,"Acquisition of Property, Plant, and Equipment"
+ShareBasedCompensation,Stock-Based Compensation
+us-gaap_PaymentsOfDividends,Payment of Dividends
+NetCashProvidedByUsedInInvestingActivities,Net Cash Provided by Investing Activities
+us-gaap_PaymentsToAcquireProductiveAssets,"Acquisition of Property, Plant, and Equipment"
+us-gaap_AmortizationOfFinancingCosts,Depreciation and Amortization

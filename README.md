@@ -1,6 +1,6 @@
 # Greenblatt's Magic Formula Stock Ranking System
 
-Author: gp1981
+Author: gp1981 with the contribution of ChatGPT4.0
 
 ## Purpose
 
@@ -55,3 +55,6 @@ When creating branches, please use descriptive names that indicate the purpose o
 -   *Bugfix*-*branch-name*: Use this prefix for branches that fix bugs or resolve issues.
 -   *Refactor*-*branch-name*: Use this prefix for branches that involve code refactoring
 -   *docs*-*branch-name*: Use this prefix for branches that involve documentation updates or improvements. Choose a branch name that clearly represents the purpose of the branch and provides context to other contributors.
+
+## ChatGPT4.0 Link
+[GitHub: ValueInvestFinnhub](https://chat.openai.com/share/06d3c853-5b08-431b-b534-0d361bcb6b1d)
