@@ -270,7 +270,8 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
         mutate(symbol = financials_data$symbol[i],
                year = as.integer(financials_data$year[i]),
                quarter = as.integer(financials_data$quarter[i]),
-               filedDate = financials_data$filedDate[i])
+               filedDate = financials_data$filedDate[i],
+               financialStatement = "bs")
       
       extracted_data <- bind_rows(extracted_data, bs_data)
     }
@@ -282,7 +283,8 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
         mutate(symbol = financials_data$symbol[i],
                year = as.integer(financials_data$year[i]),
                quarter = as.integer(financials_data$quarter[i]),
-               filedDate = financials_data$filedDate[i])
+               filedDate = financials_data$filedDate[i],
+               financialStatement = "ic")
       
       extracted_data <- bind_rows(extracted_data, ic_data)
     }
@@ -294,7 +296,8 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
         mutate(symbol = financials_data$symbol[i],
                year = as.integer(financials_data$year[i]),
                quarter = as.integer(financials_data$quarter[i]),
-               filedDate = financials_data$filedDate[i])
+               filedDate = financials_data$filedDate[i],
+               financialStatement = "cf")
       
       extracted_data <- bind_rows(extracted_data, cf_data)
     }
