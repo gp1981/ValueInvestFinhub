@@ -196,21 +196,18 @@ generateStandardNamesCSV <- function() {
 }
 
 # Extract the list of symbols and last financial statement providing type of statement, concept, year and quarter
-extract_financials_data <- function(mapping_table_path, financials_data) {
+extract_financials_data <- function(financials_data) {
   
   # Create an empty data frame to store the extracted data
   extracted_data <- data.frame(label = character(),
                                unit = character(),
-                               value = integer(),
+                               value = double(),
+                               concept = character(),
                                symbol = character(),
                                year = integer(),
                                quarter = integer(),
                                filedDate = character(),
                                stringsAsFactors = FALSE)
-  
-  # Load the mapping table to get standardised labels
-  mappingTable <- read.csv("data/mappingTable.csv")  # Adjust the file path if needed
-  
   
   # # Define the number of iterations for the loop
   total_iterations <- length(financials_data$report$bs)
@@ -303,41 +300,27 @@ extract_financials_data <- function(mapping_table_path, financials_data) {
     }
   }
   
+  # Sort the extracted data by symbol, year, quarter
+  extracted_data <- extracted_data[order(extracted_data$symbol, extracted_data$year, extracted_data$quarter), ]
   
-  # Perform the join with mapping_table to fill in the standard_name
-  extracted_data_std <- extracted_data %>%
-    left_join(mappingTable, by = "concept") %>%
-    mutate(standard_name = ifelse(is.na(standard_name), label, standard_name))
+  # Add an auxiliary column with concept without prefix
+  extracted_data$concept_aux <- sub("^[^-]+-", "", extracted_data$concept)
   
-  # Remove the duplicated rows based on label,unit,value,and concept != NA
-  extracted_data_std <- extracted_data_std %>%  
-    distinct(standard_name,unit,value,.keep_all = TRUE) %>% 
-    select(standard_name,unit,value, everything())
+  # Find the most frequent label for each concept
+  standard_name <- extracted_data %>% 
+    group_by(concept_aux) %>% 
+    filter(!is.na(label) & label != "") %>%
+    summarise(most_frequent_label = names(which.max(table(label))))
   
+  # Merge the most frequent labels into the extracted_data dataframe
+  extracted_data <- left_join(extracted_data, standard_name, by = "concept_aux")
+  extracted_data <- extracted_data %>% mutate(standard_name = most_frequent_label)
+  extracted_data <- extracted_data %>% select(standard_name, unit, value, everything())
+
   # Clean data set from rows with (all) NA
   cleaned_data <- na.omit(extracted_data)
   
-  # Return the extracted_data data frame
-  return(extracted_data_std)
+  # Return the cleaned_data data frame
+  return(cleaned_data)
+  
 }
-
-# Get unique values from extracted_data DataFrame
-# Returns: all_companies - a vector of unique company symbols
-#          all_years_list - a vector of unique years
-#          all_quarters_list - a vector of unique quarters
-get_unique_values <- function(extracted_data) {
-  # Get unique companies
-  all_companies <- unique(extracted_data$symbol)
-  
-  # Get unique years
-  all_years_list <- unique(extracted_data$year)
-  
-  # Get unique quarters
-  all_quarters_list <- unique(extracted_data$quarter)
-  
-  # Return the lists
-  return(list(all_companies = all_companies,
-              all_years_list = all_years_list,
-              all_quarters_list = all_quarters_list))
-}
-
