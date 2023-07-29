@@ -153,8 +153,64 @@ extract_financials_data <- function(financials_data) {
   # Clean data set from rows with (all) NA
   cleaned_data <- na.omit(extracted_data)
   
+  # Standardize further standard_name based on conditions
+  standardized_data <- cleaned_data %>%
+    mutate(
+      standard_name = case_when(
+        # Operating Income
+        standard_name %in% c("Operating income", "Income from operations", "Income before income taxes",
+                             "Income Before Income Taxes", "Income from continuing operations",
+                             "Income from continuing operations before taxes", "Income from operations",
+                             "LOSS BEFORE INCOME TAXES", "Loss From Operations Before Income Taxes", 
+                             "Other Income / Loss") ~ "Operating Income",
+        
+        # Revenue
+        standard_name %in% c("Net Revenue","Sales Revenue, Services, Net",
+                             "Revenues","Revenue","Total revenues") ~ "Revenue",
+        
+        # Total Assets
+        standard_name %in% c("Total assets") ~ "Total Assets",
+        
+        # Total Current Liabilities
+        standard_name %in% c("Total current liabilities") ~ "Total Current Liabilities",
+        
+        # Intangible Assets
+        standard_name %in% c("Intangible and other assets", "Goodwill and Intangible Assets Net", 
+                             "Goodwill and other intangibles, net") ~ "Intangible Assets Including Goodwill",
+        
+        standard_name %in% c("Finite-Lived Intangible Assets, Net", "Intangible and other assets", 
+                             "Intangible assets, net","Intangibles and Other Assets, Net", 
+                             "Intangibles and other assets, net", "Other intangible assets, net") ~ "Intangible Assets Excluding Goodwill",
+        
+        # Short-Term Debts
+        standard_name %in% c("Convertible debt, current portion","Current portion of debt",
+                             "Current portion of long-term debt","Long-term debt due within one year",
+                             "Short-term debt") ~ "Short-Term debt",
+        
+        # Long-Term Debts
+        standard_name %in% c("Convertible debt, net of current portion","Debt","Debt Net",
+                             "Long Term Line of Credit and Long Term Debt excluding Current Maturities",
+                             "Long-term debt", "Long-term Debt", "Long-Term Debt", "Long-term debt, net of current portion",
+                             "Nonrecourse project debt", "Residual interests classified as debt", 
+                             "Term loan, less debt issuance costs") ~ "Long-Term debt",
+        
+        # Capital Lease and Obligations
+        standard_name %in% c("Capital lease obligation", "Capital Lease Obligations Current",
+                             "Capital Lease Obligations Noncurrent") ~ "Capital Lease and Obligations",
+        
+        # Preferred stock
+        standard_name %in% c("Preferred stock") ~ "Preferred Stock",
+        
+        # Minority Interest
+        standard_name %in% c("Noncontrolling interests") ~ "Minority Interest",
+        
+        TRUE ~ standard_name  # For other cases, keep the original standard_name
+      )
+    ) %>% select(standard_name,everything())
+  
+  
   # Return the cleaned_data data frame
-  return(cleaned_data)
+  return(standardized_data)
 }
 
 
