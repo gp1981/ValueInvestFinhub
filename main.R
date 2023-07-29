@@ -48,7 +48,7 @@ filteredDF <- filterCompanies(cleanDF, minMarketCapMillionUSD = 0)  # Example: M
 # Retrieve financial data for filtered companies
 financialsDF <- retrieveFinancials(filteredDF, API_KEY)
 # mapping_table_path <- "data/mappingTable.csv"
-extracted_data <- extract_financials_data(financials_data = financialsDF)
+standardized_data <- extract_financials_data(financials_data = financialsDF)
 
 
 # -------------------- 04 - Data Analysis --------------------
