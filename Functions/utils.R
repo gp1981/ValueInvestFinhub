@@ -158,7 +158,7 @@ extract_financials_data <- function(financials_data) {
     mutate(
       standard_name = case_when(
         # Operating Income
-        standard_name %in% c("Operating income", "Income from operations", "Income before income taxes",
+        standard_name %in% c("Operating income", "Operating Income (Loss)", "Income from operations", "Income before income taxes",
                              "Income Before Income Taxes", "Income from continuing operations",
                              "Income from continuing operations before taxes", "Income from operations",
                              "LOSS BEFORE INCOME TAXES", "Loss From Operations Before Income Taxes", 
