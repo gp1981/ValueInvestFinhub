@@ -43,12 +43,12 @@ rm(commonStocks, commonStockProfiles, commonStockProfilesDF)
 cleanDF <- cleanCommonStocksDF(commonStocksDF)
 
 # Filter companies based on exclusion criteria and minimum market capitalization
-filteredDF <- filterCompanies(cleanDF, minMarketCapMillionUSD = 50)  # Example: Minimum market cap of 50 million USD
+filteredDF <- filterCompanies(cleanDF, minMarketCapMillionUSD = 0)  # Example: Minimum market cap of 50 million USD
 
 # Retrieve financial data for filtered companies
 financialsDF <- retrieveFinancials(filteredDF, API_KEY)
-mapping_table_path <- "data/mappingTable.csv"
-extracted_data <- extract_financials_data(mapping_table_path, financials_data = financialsDF)
+# mapping_table_path <- "data/mappingTable.csv"
+standardized_data <- extract_financials_data(financials_data = financialsDF)
 
 
 # -------------------- 04 - Data Analysis --------------------
