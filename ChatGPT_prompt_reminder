@@ -1,0 +1,19 @@
+There are a number of variables to use for the magic formula which consists :
+ROC = EBIT / Tangible Capital Employed
+where 
+Tangible Capital Employed = Total Assets - (goodwillAndIntangibleAssets + cashAndShortTermInvestments)
+
+and 
+Earnings Yield = EBIT / Enterprise Value
+ where Enterprise Value = Market Value of Equity + Net interest-bearing debt +
+minority interest + preferred stock
+where Market Value of Equity = Share Price x Outstanding Common Shares = market cap                        and Net interest-bearing debt =  Total Debt + capitalLeaseObligations - 
+(Cash&ShortTermInvestment - Cash&CashEquivalent) 
+
+Now we need to replicate these formulas in analysis.R. However before we can do it we need to find the value for each of the variable of the formula in the extracted data.
+
+Now the problem is that:
+
+1) the magic formula applies on the last 4 quarters. In extracted_data we have many quarters for each company. For the balancesheet data (marked in extracted_data on the column financialStatement as "bs") we will take the last quarter. For the data in the income statement (marked as "ic") we will have to aggregate the value of the last 4 quarters for the specific variable in the formula. 
+2) Below a couple of sample from the extracted_data to show you the structure of the dataframe:
+> head(extracted_data, n = 5)
